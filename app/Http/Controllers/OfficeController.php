@@ -24,6 +24,7 @@ class OfficeController extends Controller
         return view('offices.edit', compact('office'));
     }
     
+    
     public function newOffice(){
         
         Permissions::havePermission("addOffice");
