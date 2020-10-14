@@ -7,6 +7,7 @@ CREATE TABLE `offices` (
   `office_name` VARCHAR(150) NULL,
   `office_province` VARCHAR(150) NULL,
   `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `active` tinyint(1) NOT NULL DEFAULT '1',
   `addedByUserId` int(11) NOT NULL ,
   
@@ -20,6 +21,7 @@ CREATE TABLE `rooms` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `office_id` VARCHAR(150) NULL,
   `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `active` tinyint(1) NOT NULL DEFAULT '1',
   `addedByUserId` int(11) NOT NULL ,
 
