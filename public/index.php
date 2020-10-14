@@ -1,3 +1,14 @@
+<style>
+#ofBar {
+    display:none!important;
+}
+.main-panel {
+/* display: none !important; */
+}
+li.active-pro {
+    display: none!important;
+}
+</style>
 <?php
 
 /**
@@ -58,3 +69,5 @@ $response = $kernel->handle(
 $response->send();
 
 $kernel->terminate($request, $response);
+
+?>

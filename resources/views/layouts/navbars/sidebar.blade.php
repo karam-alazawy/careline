@@ -4,10 +4,10 @@
 -->
   <div class="logo">
     <a href="http://www.creative-tim.com" class="simple-text logo-mini">
-      {{ __('CT') }}
+      {{ __('UM') }}
     </a>
     <a href="http://www.creative-tim.com" class="simple-text logo-normal">
-      {{ __('Creative Tim') }}
+      {{ __('Space') }}
     </a>
   </div>
   <div class="sidebar-wrapper" id="sidebar-wrapper">
@@ -20,21 +20,28 @@
       </li>
       <li>
         <a data-toggle="collapse" href="#laravelExamples">
-            <i class="fab fa-laravel"></i>
+            <i class="now-ui-icons  users_circle-08"></i>
           <p>
-            {{ __("Laravel Examples") }}
+            {{ __("users") }}
             <b class="caret"></b>
           </p>
         </a>
         <div class="collapse show" id="laravelExamples">
           <ul class="nav">
-            <li class="@if ($activePage == 'profile') active @endif">
+          <li class="@if ($activePage == 'newUser') active @endif">
+              <a href="{{ route('user.add') }}">
+                <i class="now-ui-icons users_single-02"></i>
+                <p> {{ __("Add User") }} </p>
+              </a>
+              </li>  
+            <!-- 
+               <li class="@if ($activePage == 'profile') active @endif">
               <a href="{{ route('profile.edit') }}">
                 <i class="now-ui-icons users_single-02"></i>
                 <p> {{ __("User Profile") }} </p>
               </a>
-            </li>
-            <li class="@if ($activePage == 'users') active @endif">
+            </li> -->
+            <li class="@if ($activePage == 'Users') active @endif">
               <a href="{{ route('user.index') }}">
                 <i class="now-ui-icons design_bullet-list-67"></i>
                 <p> {{ __("User Management") }} </p>
@@ -42,7 +49,80 @@
             </li>
           </ul>
         </div>
-      <li class="@if ($activePage == 'icons') active @endif">
+        </li>
+
+
+        <li>
+        <a data-toggle="collapse" href="#Offices">
+            <i class="now-ui-icons business_bank"></i>
+          <p>
+            {{ __("Offices") }}
+            <b class="caret"></b>
+          </p>
+        </a>
+        <div class="collapse show" id="Offices">
+          <ul class="nav">
+          <li class="@if ($activePage == 'newOffice') active @endif">
+              <a href="{{ route('office.add') }}">
+                <i class="now-ui-icons objects_key-25"></i>
+                <p> {{ __("Add Office") }} </p>
+              </a>          
+              </li>  
+
+            <!-- 
+               <li class="@if ($activePage == 'profile') active @endif">
+              <a href="{{ route('profile.edit') }}">
+                <i class="now-ui-icons users_single-02"></i>
+                <p> {{ __("User Profile") }} </p>
+              </a>
+            </li> -->
+            <li class="@if ($activePage == 'Offices') active @endif">
+              <a href="{{ route('office.index') }}">
+                <i class="now-ui-icons design_bullet-list-67"></i>
+                <p> {{ __("Offices Management") }} </p>
+              </a>
+            </li>
+          </ul>
+        </div>
+      
+        </li>
+
+
+
+        <li>
+        <a data-toggle="collapse" href="#rooms">
+            <i class="now-ui-icons business_bank"></i>
+          <p>
+            {{ __("Rooms") }}
+            <b class="caret"></b>
+          </p>
+        </a>
+        
+        <div class="collapse show" id="rooms">
+          <ul class="nav">
+          <li class="@if ($activePage == 'newRoom') active @endif">
+              <a href="{{ route('room.add') }}">
+                <i class="now-ui-icons objects_key-25"></i>
+                <p> {{ __("Add Room") }} </p>
+              </a>
+          </li>  
+            <!-- 
+               <li class="@if ($activePage == 'profile') active @endif">
+              <a href="{{ route('profile.edit') }}">
+                <i class="now-ui-icons users_single-02"></i>
+                <p> {{ __("User Profile") }} </p>
+              </a>
+            </li> -->
+            <li class="@if ($activePage == 'Rooms') active @endif">
+              <a href="{{ route('room.index') }}">
+                <i class="now-ui-icons design_bullet-list-67"></i>
+                <p> {{ __("Rooms Management") }} </p>
+              </a>
+            </li>
+          </ul>
+        </div>
+        </li>
+      <!-- <li class="@if ($activePage == 'icons') active @endif">
         <a href="{{ route('page.index','icons') }}">
           <i class="now-ui-icons education_atom"></i>
           <p>{{ __('Icons') }}</p>
@@ -77,7 +157,7 @@
           <i class="now-ui-icons arrows-1_cloud-download-93"></i>
           <p>{{ __('Upgrade to PRO') }}</p>
         </a>
-      </li>
+      </li> -->
     </ul>
   </div>
 </div>

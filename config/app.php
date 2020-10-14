@@ -189,6 +189,7 @@ return [
     */
 
     'aliases' => [
+        'Permissions' => App\Helpers\Permissions::class,
 
         'App' => Illuminate\Support\Facades\App::class,
         'Arr' => Illuminate\Support\Arr::class,

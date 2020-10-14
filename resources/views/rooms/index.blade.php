@@ -1,7 +1,7 @@
 @extends('layouts.app', [
     'class' => 'sidebar-mini ',
-    'namePage' => 'Users',
-    'activePage' => 'Users',
+    'namePage' => 'Rooms',
+    'activePage' => 'Rooms',
     'activeNav' => '',
 ])
 
@@ -58,7 +58,7 @@
                     <td>{{$data->created_at}}</td>
               
                       <td class="text-right">
-                      <a type="button" href="{{ route('user.edit',[$data->id]) }}" rel="tooltip" class="btn btn-success btn-icon btn-sm " data-original-title="" title="">
+                      <a type="button" href="{{ route('user.edit',[1]) }}" rel="tooltip" class="btn btn-success btn-icon btn-sm " data-original-title="" title="">
                         <i class="now-ui-icons ui-2_settings-90"></i>
                       </a>
                                                               </td>
