@@ -16,8 +16,8 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-              <a class="btn btn-primary btn-round text-white pull-right" href="{{ route('user.add') }}">Add user</a>
-            <h4 class="card-title">Users</h4>
+              <a class="btn btn-primary btn-round text-white pull-right" href="{{ route('user.add') }}">Add Rooms</a>
+            <h4 class="card-title">Rooms</h4>
             <div class="col-12 mt-2">
                                         </div>
           </div>
@@ -27,25 +27,23 @@
             </div>
             <table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
               <thead>
-                <tr>
-                  <th>Profile</th>
+              <tr>
+                  <th>#</th>
                   <th>Name</th>
-                  <th>Email</th>
                   <th>Creation date</th>
                   <th class="disabled-sorting text-right">Actions</th>
                 </tr>
               </thead>
               <tfoot>
                 <tr>
-                  <th>Profile</th>
+                  <th>#</th>
                   <th>Name</th>
-                  <th>Email</th>
                   <th>Creation date</th>
                   <th class="disabled-sorting text-right">Actions</th>
                 </tr>
               </tfoot>
               <tbody>
-              @foreach($users as $key => $data)
+              @foreach($rooms as $key => $data)
 
                                   <tr>
                     <td>
@@ -53,8 +51,7 @@
                         <img src="{{asset('assets')}}/img/default-avatar.png" alt="" style="max-width: 80px; border-radiu: 100px">
                       </span>
                     </td>
-                    <td>{{$data->name}}</td>
-                    <td>{{$data->email}}</td>
+                    <td>{{$data->roomLang->room_name}}</td>
                     <td>{{$data->created_at}}</td>
               
                       <td class="text-right">

@@ -8,6 +8,12 @@ use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use App\Models\users;
+use App\Models\office;
+use App\Models\Subscription;
+use App\Models\SubscriptionName;
+
+use Carbon\Carbon;
 
 class UserController extends Controller
 {
@@ -21,31 +27,134 @@ class UserController extends Controller
      */
     public function index(User $model)
     {
+        Permissions::checkActive();
         return view('users.index', ['users' => $model->paginate(15)]);
     }
     public function users(){
-        $users = DB::table('users')->get();
+        Permissions::checkActive();
+        $users = users::where('active',1)->where( 'id','!=',1)->get();
         Permissions::havePermission("editUsers");
-        
         return view('users.index', ['users' => $users]);
     }
+
+    public function inactive(){
+        Permissions::checkActive();
+        $users = users::where('active',0)->get();
+        Permissions::havePermission("editUsers");
+        return view('users.inactive', ['users' => $users]);
+    }
+    
     public function edituser($id){
-        
-        $user = DB::table('users')->where('id',$id)->get()->first();
+        Permissions::checkActive();
+        $user = users::where('id',$id)->get()->first();
         //return $user->{'name'};
         Permissions::havePermission("editUsers");
         return view('users.edit', ['user' => $user]);
     }
     public function newUser(){
-        
-        Permissions::havePermission("addUser");
-        $offices = DB::table('offices')->select("office_name","id")->where('active',1)->get();
+        //  return  Carbon::now()->addMonths(1);
+          Permissions::checkActive();
+          Permissions::havePermission("addUser");
+        //  $is_super_admin = Permissions::havePermission("allper");
+        // ->when(!$is_super_admin , function ($q) use (auth()->user()->id){
+        //     $q->where();
+        // })
+          $lang=1;
+          // $offices = office::join('office_bnames', 'offices.id', '=', 'office_names.office_id')->select("office_name","offices.id")->where('active',1)->get();
+          $offices = office::with(['officeLang' => function ($q) use ($lang) {
+              $q->where('lang_id',$lang);
+              // $q->addSelect('?')
+          }])
+          ->get();
+       // return $offices->officeLang->office_id;
+          // return view('users.add',['offices' => $offices]);
+           return view('users.add',compact('offices'));
+  
+      }
 
-        return view('users.add',['offices' => $offices]);
+      
+      public function addSubscription(){
+        //  return  Carbon::now()->addMonths(1);
+          Permissions::checkActive();
+          Permissions::havePermission("addSubscription");
+       
+           return view('users.addSubscription');
+  
+      }
+      public function addNewSubscription(Request $request)
+      {
+          Permissions::checkActive();
+          Permissions::havePermission("addSubscription");
+          $subscription = Subscription::create([
+              'price' => $request['price'],
+              'type' => $request['type'],
+              'period' => $request['period'],
+              'addedByUserId' => auth()->user()->id
+              ]);
+              if ($subscription) {
+                  $id=$subscription->id;
+                  for ($i=1; $i <4 ; $i++) { 
+                      $subscription_name = SubscriptionName::create([
+                          'subscription_name' => $request['name'],
+                          'subscription_id' => $id,
+                          'lang_id' => $i,
+                          ]);
+                  }
+                
+              }
+             
+          return back()->withStatus(__('Subscription successfully added.'));
+  
+      }
+  
+    public function userSubscription(Request $request){
+        $id=$request['id'];
+        Permissions::checkActive();
+        Permissions::havePermission("userSubscription");
+        $lang=1;
+        $subscriptions = Subscription::with(['subscriptionLang' => function ($q) use ($lang) {
+            $q->where('lang_id',$lang);
+            // $q->addSelect('?')
+        }])->get();
+
+        return view('users.subscription',compact('subscriptions'));
     }
+
     public function addNewUser(Request $request)
     {
-        return back()->withStatus(__($request['office']));
+        Permissions::checkActive();
+        Permissions::havePermission("addUser");
+        $permissions=0;
+        if($request['permissions'])
+        $permissions=implode( ",", $request['permissions'] ); 
+        try { 
+            $users = users::create([
+                'name' => $request['name'],
+                'email' => $request['email'],
+                'office' => $request['office'],
+                'password' => Hash::make($request['password']),
+                'permissions' => $permissions,
+                'office_id' => $request['office'],
+                'addedByUserId' => auth()->user()->id
+                ]);
+                // if (!$users) {
+                //     return back()->withStatus(__("error"));
+                // }
+                return back()->withStatus(__('User successfully added.'));
+          } catch(\Illuminate\Database\QueryException $ex){ 
+            return back()->withStatus(__('This email address is not available. choose a different address'));
+            // Note any method of class PDOException can be called on $ex.
+          }
+    
+
+    }
+
+    public function activeUser($id)
+    {
+        Permissions::checkActive();
+        $users = users::where('id', $id)
+        ->update(['active' => 1]);
+            return back()->withStatus(__('User successfully added.'));
 
     }
  

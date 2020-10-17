@@ -17,4 +17,11 @@ class Permissions
         return true;
 
     }
+    public static function checkActive()
+    {
+        if (!auth()->user()->active) {
+            return abort(403, 'Current user is not activated in the system');
+        }
+    }
+    
 }

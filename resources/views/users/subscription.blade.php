@@ -1,7 +1,7 @@
 @extends('layouts.app', [
     'class' => 'sidebar-mini ',
-    'namePage' => 'Add User',
-    'activePage' => 'newUser',
+    'namePage' => 'User Subscription',
+    'activePage' => 'userSubscription',
     'activeNav' => '',
 ])
 
@@ -13,7 +13,7 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            <h5 class="title">{{__("Add User")}}</h5>
+            <h5 class="title">{{__(" User Subscription")}}</h5>
           </div>
           <div class="card-body">
             <form method="post" action="{{ route('user.add') }}" autocomplete="off"
@@ -53,12 +53,12 @@
                 <div class="row">
                 <div class="col-md-7 pr-1">
                 <div class="form-group">
-                    <label for="exampleInputEmail1">{{__(" Office")}}</label>
+                    <label for="exampleInputEmail1">{{__("Subscription")}}</label>
                      <div class="row">
                       <div class="col-xs-5 officeSelect">
                         <select name="office" id="officeSelect" class="form-control">
-                        @foreach($offices as $key => $data)
-                          <option value="{{$data->id}}">{{$data->officeLang->office_name}}</option>
+                        @foreach($subscriptions as $key => $data)
+                          <option value="{{$data->id}}">{{$data->subscriptionLang->subscription_name}}</option>
                           @endforeach
                         </select>
                       </div>
@@ -67,46 +67,10 @@
                     </div>
                     </div>
 
-                    <div class="form-group">
-                    <label for="exampleInputEmail1">{{__(" Country and Province")}}</label>
-                     <div class="row">
-                     <div class="col-xs-5 officeSelect">
-                        <select name="office" id="officeSelect" class="form-control">
-                        @foreach($offices as $key => $data)
-                          <option value="{{$data->id}}">{{$data->officeLang->office_name}}</option>
-                          @endforeach
-                        </select>
-                      </div>
-                      
-                      
-                      <div class="col-xs-5 officeSelect">
-                        <select name="office" id="officeSelect" class="form-control">
-                        @foreach($offices as $key => $data)
-                          <option value="{{$data->id}}">{{$data->officeLang->office_name}}</option>
-                          @endforeach
-                        </select>
-                      </div>
-                      
-                      
-                      
-                    </div>
-                    </div>
+         
+                     
                   </div>
-                  <div class="col-md-7 pr-1">
-                    <div class="form-group">
-                    <label for="exampleInputEmail1">{{__(" Permissions")}}</label>
-                     <div class="row">
-                      <div class="col-xs-5 multiselect">
-                        <select name="permissions[]" id="multiselect" class="form-control" size="8" multiple="multiple">
-                          <option value="addUser">Add User</option>
-                          <option value="dataEntery">Data Entery</option>
-                          <option value="addRoom">Add Room</option>
-                        </select>
-                      </div>
-                      
-                    </div>
-                    </div>
-                  </div>
+               
                 </div>
               <div class="card-footer ">
                 <button type="submit" class="btn btn-primary btn-round">{{__('Add')}}</button>

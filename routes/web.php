@@ -25,10 +25,16 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => 'auth'], function () {
+	//users
 	Route::get('/newUser',  'UserController@newUser');
 	Route::get('/editUser/{id}', ['as' => 'user.edit', 'uses' => 'UserController@editUser']);
 	Route::get('/users',  ['as' => 'user.index', 'uses' => 'UserController@users']);
+	Route::get('/inactive',  ['as' => 'user.inactive', 'uses' => 'UserController@inactive']);
+	Route::get('/activeUser/{id}', ['as' => 'user.activeUser', 'uses' => 'UserController@activeUser']);
 	Route::post('newUser/', ['as' => 'user.add', 'uses' => 'UserController@addNewUser']);
+	Route::get('userSubscription/', ['as' => 'user.userSubscription', 'uses' => 'UserController@userSubscription']);
+	Route::get('addSubscription/', ['as' => 'user.addSubscription', 'uses' => 'UserController@addSubscription']);
+	Route::post('addNewSubscription/', ['as' => 'user.addNewSubscription', 'uses' => 'UserController@addNewSubscription']);
 
 	//office
 	Route::get('/newOffice',  'OfficeController@newOffice');
@@ -41,6 +47,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/newRoom',  'RoomController@newRoom');
 	Route::get('/rooms',  ['as' => 'room.index', 'uses' => 'RoomController@rooms']);
 	Route::post('newRoom/', ['as' => 'room.add', 'uses' => 'RoomController@addNewRoom']);
+	Route::get('getOffice/', ['as' => 'room.getOffice', 'uses' => 'RoomController@getOffice']);
 
 
 //	Route::resource('user', 'UserController', ['except' => ['show']]);

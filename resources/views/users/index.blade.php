@@ -56,8 +56,11 @@
                     <td>{{$data->name}}</td>
                     <td>{{$data->email}}</td>
                     <td>{{$data->created_at}}</td>
-              
+                    
                       <td class="text-right">
+                      <a type="button" href="userSubscription?id={{$data->id}}" rel="tooltip" class="btn btn-success btn-icon btn-sm " data-original-title="" title="">
+                        <i class="now-ui-icons ui-2_settings-90"></i>
+                      </a>
                       <a type="button" href="{{ route('user.edit',[$data->id]) }}" rel="tooltip" class="btn btn-success btn-icon btn-sm " data-original-title="" title="">
                         <i class="now-ui-icons ui-2_settings-90"></i>
                       </a>

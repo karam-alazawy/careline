@@ -1,8 +1,8 @@
 @extends('layouts.app', [
     'class' => 'sidebar-mini ',
-    'namePage' => 'Offices',
-    'activePage' => 'Offices',
-    'activeNav' => '2',
+    'namePage' => 'Inactive Users',
+    'activePage' => 'inactiveUsers',
+    'activeNav' => '',
 ])
 
 @section('content')
@@ -16,8 +16,10 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-              <a class="btn btn-primary btn-round text-white pull-right" href="{{ route('office.add') }}">Add Office</a>
-            <h4 class="card-title">Offices</h4>
+              <a class="btn btn-primary btn-round text-white pull-right" href="{{ route('user.add') }}">Add user</a>
+            <h4 class="card-title">Users</h4>
+            @include('alerts.success')
+
             <div class="col-12 mt-2">
                                         </div>
           </div>
@@ -28,45 +30,37 @@
             <table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
               <thead>
                 <tr>
-                  <th>#</th>
-                  <th>Office Name</th>
-                  <th>Office Country</th>
-                  <th>Office Province</th>
+                  <th>Profile</th>
+                  <th>Name</th>
+                  <th>Email</th>
                   <th>Creation date</th>
                   <th class="disabled-sorting text-right">Actions</th>
                 </tr>
               </thead>
               <tfoot>
                 <tr>
-                  <th>#</th>
-                  <th>Office Name</th>
-                  <th>Office Country</th>
-                  <th>Office Province</th>
+                  <th>Profile</th>
+                  <th>Name</th>
+                  <th>Email</th>
                   <th>Creation date</th>
                   <th class="disabled-sorting text-right">Actions</th>
                 </tr>
               </tfoot>
               <tbody>
-              @foreach($offices as $key => $data)
+              @foreach($users as $key => $data)
 
                                   <tr>
                     <td>
                       <span class="avatar avatar-sm rounded-circle">
-                      <img src="{{asset('assets')}}/img/office.webp" alt="" style="max-width: 80px; border-radiu: 100px">
+                        <img src="{{asset('assets')}}/img/default-avatar.png" alt="" style="max-width: 80px; border-radiu: 100px">
                       </span>
                     </td>
-                    <td>{{$data->officeLang->office_name}}</td>
-                    <td>{{$data->officeCountry->country_name}}</td>
-                    <td>{{$data->office_province}}</td>
+                    <td>{{$data->name}}</td>
+                    <td>{{$data->email}}</td>
                     <td>{{$data->created_at}}</td>
               
-             
-                 
-                   <td class="text-right">
-                   <a type="button" href="rooms?office={{$data->id}}" rel="tooltip" class="btn btn-info btn-icon btn-sm " data-original-title="" title="">
-                        <i class="now-ui-icons business_bank"></i>
-                      </a>
-                      <a type="button" href="{{ route('office.edit',[$data->id]) }}" rel="tooltip" class="btn btn-success btn-icon btn-sm " data-original-title="" title="">
+                      <td class="text-right">
+                      <a type="button" href="{{ route('user.activeUser',[$data->id]) }}" rel="tooltip" class="btn btn-success btn-icon btn-sm " data-original-title="" title="">
                         <i class="now-ui-icons ui-2_settings-90"></i>
                       </a>
                                                               </td>

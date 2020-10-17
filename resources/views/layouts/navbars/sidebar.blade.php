@@ -44,12 +44,54 @@
             <li class="@if ($activePage == 'Users') active @endif">
               <a href="{{ route('user.index') }}">
                 <i class="now-ui-icons design_bullet-list-67"></i>
-                <p> {{ __("User Management") }} </p>
+                <p> {{ __("Users Management") }} </p>
+              </a>
+            </li>
+            <li class="@if ($activePage == 'inactiveUsers') active @endif">
+              <a href="{{ route('user.inactive') }}">
+                <i class="now-ui-icons design_bullet-list-67"></i>
+                <p> {{ __("Inactive Users") }} </p>
               </a>
             </li>
           </ul>
         </div>
         </li>
+
+
+        <li>
+        <a data-toggle="collapse" href="#Subscription">
+            <i class="now-ui-icons business_bank"></i>
+          <p>
+            {{ __("Subscription") }}
+            <b class="caret"></b>
+          </p>
+        </a>
+        
+        <div class="collapse show" id="Subscription">
+          <ul class="nav">
+          <li class="@if ($activePage == 'newSubscription') active @endif">
+          <a href="{{ route('user.addSubscription') }}">
+                <i class="now-ui-icons objects_key-25"></i>
+                <p> {{ __("Add Subscription") }} </p>
+              </a>
+          </li>  
+            <!-- 
+               <li class="@if ($activePage == 'profile') active @endif">
+              <a href="{{ route('profile.edit') }}">
+                <i class="now-ui-icons users_single-02"></i>
+                <p> {{ __("User Profile") }} </p>
+              </a>
+            </li> -->
+            <li class="@if ($activePage == 'subscriptions') active @endif">
+              <a href="{{ route('user.addSubscription') }}">
+                <i class="now-ui-icons design_bullet-list-67"></i>
+                <p> {{ __("Subscriptions Management") }} </p>
+              </a>
+            </li>
+          </ul>
+        </div>
+        </li>
+
 
 
         <li>
@@ -114,7 +156,7 @@
               </a>
             </li> -->
             <li class="@if ($activePage == 'Rooms') active @endif">
-              <a href="{{ route('room.index') }}">
+              <a href="{{ route('room.getOffice') }}">
                 <i class="now-ui-icons design_bullet-list-67"></i>
                 <p> {{ __("Rooms Management") }} </p>
               </a>
