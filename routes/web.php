@@ -35,7 +35,9 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('userSubscription/', ['as' => 'user.userSubscription', 'uses' => 'UserController@userSubscription']);
 	Route::get('addSubscription/', ['as' => 'user.addSubscription', 'uses' => 'UserController@addSubscription']);
 	Route::post('addNewSubscription/', ['as' => 'user.addNewSubscription', 'uses' => 'UserController@addNewSubscription']);
-
+	Route::post('renewalSubscription/', ['as' => 'user.renewalSubscription', 'uses' => 'UserController@renewalSubscription']);
+	Route::get('subscriptions/', ['as' => 'user.subscriptions', 'uses' => 'UserController@subscriptions']);
+	
 	//office
 	Route::get('/newOffice',  'OfficeController@newOffice');
 	Route::get('/offices',  ['as' => 'office.index', 'uses' => 'OfficeController@offices']);

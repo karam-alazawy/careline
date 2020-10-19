@@ -117,7 +117,7 @@ class UserController extends Controller
             // $q->addSelect('?')
         }])->get();
 
-        return view('users.subscription',compact('subscriptions'));
+        return view('users.subscription',compact('subscriptions','id'));
     }
 
     public function addNewUser(Request $request)
@@ -149,12 +149,71 @@ class UserController extends Controller
 
     }
 
+    public function renewalSubscription(Request $request)
+    {
+        Permissions::checkActive();
+        Permissions::havePermission("renewalSubscription");
+
+        $subscription = Subscription::where('active',1)->where( 'id',$request['type'])->first();
+
+        $flager=1;
+        $date=0;
+        $subscription_date = users::select("subscription_date")->find($request['id']);
+        $subscription_date = $subscription_date->subscription_date;
+        if ($subscription_date<Carbon::now()) {
+            $subscription_date=Carbon::now();
+        }
+          switch ($subscription->type) {
+            case 'daily':
+                $date=Carbon::parse($subscription_date)->addDays($subscription->period);
+                break;
+            case 'weekly':
+                $date=Carbon::parse($subscription_date)->addWeeks($subscription->period);
+                    break;
+            case 'monthly':
+                $date=Carbon::parse($subscription_date)->addMonths($subscription->period);
+                break;
+            case 'yearly':
+                    $date=Carbon::parse($subscription_date)->addYears($subscription->period);
+                    break;
+                  
+              default:
+                  $flager=0;
+                  break;
+          }
+          if ($flager) {
+
+            
+            $renewalSubscription = users::where('id',  $request['id'])
+            ->update(['subscription_date' => $date]);
+            return back()->withStatus(__("Successfully"));
+
+          }
+          return back()->withStatus(__("error"));
+
+           
+
+    }
+
+    
+    public function subscriptions()
+    {
+         Permissions::checkActive();
+         Permissions::havePermission("editSubscriptions");
+         $lang=1;
+         $subscriptions = Subscription::with(['subscriptionLang' => function ($q) use ($lang) {
+            $q->where('lang_id',$lang);
+            // $q->addSelect('?')
+         }])->get();
+          return view('users.subscriptions',compact('subscriptions'));
+ 
+    }
     public function activeUser($id)
     {
         Permissions::checkActive();
         $users = users::where('id', $id)
         ->update(['active' => 1]);
-            return back()->withStatus(__('User successfully added.'));
+            return back()->withStatus(__('User Successfully Added.'));
 
     }
  

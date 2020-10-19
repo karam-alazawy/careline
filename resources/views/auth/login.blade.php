@@ -66,12 +66,12 @@
                 <button  type = "submit" class="btn btn-primary btn-round btn-lg btn-block mb-3">{{ __('Get Started') }}</button>
                 <div class="pull-left">
                     <h6>
-                    <a href="{{ route('register') }}" class="link footer-link">{{ __('Create Account') }}</a>
+                    <!-- <a href="{{ route('register') }}" class="link footer-link">{{ __('Create Account') }}</a> -->
                     </h6>
                 </div>
                 <div class="pull-right">
                     <h6>
-                    <a href="{{ route('password.request') }}" class="link footer-link">{{ __('Forgot Password?') }}</a>
+                    <!-- <a href="{{ route('password.request') }}" class="link footer-link">{{ __('Forgot Password?') }}</a> -->
                     </h6>                
                 </div>
                 </div>

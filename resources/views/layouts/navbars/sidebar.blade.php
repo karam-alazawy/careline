@@ -83,7 +83,7 @@
               </a>
             </li> -->
             <li class="@if ($activePage == 'subscriptions') active @endif">
-              <a href="{{ route('user.addSubscription') }}">
+              <a href="{{ route('user.subscriptions') }}">
                 <i class="now-ui-icons design_bullet-list-67"></i>
                 <p> {{ __("Subscriptions Management") }} </p>
               </a>

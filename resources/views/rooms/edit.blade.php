@@ -23,8 +23,6 @@
               @include('alerts.success')
             
                 <div class="row">
-                
-                              
                 <div class="col-md-7 pr-1">
                     <div class="form-group">
                     <label for="exampleInputEmail1">{{__(" Office")}}</label>
@@ -38,13 +36,6 @@
                       </div>
                     </div>
                     </div>
-                                                  
-                  
-                    
-                   
-
-                                                
-              
               <div class="card-footer ">
                 <button type="submit" class="btn btn-primary btn-round">{{__('Show Rooms')}}</button>
               </div>

@@ -27,7 +27,9 @@
                     <div class="col-md-7 pr-1">
                         <div class="form-group">
                             <label>{{__("Room Name")}}</label>
+
                                 <input type="text" name="name" class="form-control" value="">
+
                                 @include('alerts.feedback', ['field' => 'name'])
                         </div>
                     </div>
@@ -42,7 +44,9 @@
                       <div class="col-xs-5 officeSelect">
                         <select name="office" id="officeSelect" class="form-control">
                         @foreach($offices as $key => $data)
+
                           <option value="{{$data->id}}">{{$data->officeLang->office_name}}</option>
+
                           @endforeach
                         </select>
                       </div>
@@ -54,10 +58,8 @@
                      <div class="row">
                       <div class="col-xs-5 officeSelect">
                         <select name="roomType" id="officeSelect" class="form-control">
-                       
                         <option value="1">Type 1</option>
                         <option value="2">Type 2</option>
-                         
                         </select>
                       </div>
                     </div>

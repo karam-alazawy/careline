@@ -1,5 +1,5 @@
 @extends('layouts.app', [
-    'class' => 'sidebar-mini ',
+    'class' => 'Subscriptions',
     'namePage' => 'User Subscription',
     'activePage' => 'userSubscription',
     'activeNav' => '',
@@ -16,47 +16,22 @@
             <h5 class="title">{{__(" User Subscription")}}</h5>
           </div>
           <div class="card-body">
-            <form method="post" action="{{ route('user.add') }}" autocomplete="off"
+            <form method="post" action="{{ route('user.renewalSubscription') }}" autocomplete="off"
             enctype="multipart/form-data">
               @csrf
               @method('post')
               @include('alerts.success')
               <div class="row">
               </div>
-                <div class="row">
-                    <div class="col-md-7 pr-1">
-                        <div class="form-group">
-                            <label>{{__(" Name")}}</label>
-                                <input type="text" name="name" class="form-control" value="">
-                                @include('alerts.feedback', ['field' => 'name'])
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-7 pr-1">
-                    <div class="form-group">
-                      <label for="exampleInputEmail1">{{__(" Email address")}}</label>
-                      <input type="email" name="email" class="form-control" placeholder="Email" value="">
-                      @include('alerts.feedback', ['field' => 'email'])
-                    </div>
-                  </div>
-                </div>                
-                <div class="row">
-                  <div class="col-md-7 pr-1">
-                    <div class="form-group">
-                      <label for="exampleInputEmail1">{{__(" Password")}}</label>
-                      <input type="password" name="password" class="form-control" placeholder="******" value="">
-                      @include('alerts.feedback', ['field' => 'Password'])
-                    </div>
-                  </div>
-                </div>                
+              
+              <input hidden name="id" type="text" value="{{$id}}">
                 <div class="row">
                 <div class="col-md-7 pr-1">
                 <div class="form-group">
                     <label for="exampleInputEmail1">{{__("Subscription")}}</label>
                      <div class="row">
                       <div class="col-xs-5 officeSelect">
-                        <select name="office" id="officeSelect" class="form-control">
+                        <select name="type" id="officeSelect" class="form-control">
                         @foreach($subscriptions as $key => $data)
                           <option value="{{$data->id}}">{{$data->subscriptionLang->subscription_name}}</option>
                           @endforeach

@@ -1,5 +1,5 @@
 @extends('layouts.app', [
-    'class' => 'sidebar-mini ',
+    'class' => 'Subscriptions',
     'namePage' => 'Add Subscription',
     'activePage' => 'newSubscription',
     'activeNav' => '',
@@ -23,7 +23,7 @@
               @include('alerts.success')
               <div class="row">
               </div>
-                <div class="row">
+             <div class="row">
                     <div class="col-md-7 pr-1">
                         <div class="form-group">
                             <label>{{__(" Name")}}</label>

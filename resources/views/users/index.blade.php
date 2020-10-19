@@ -1,5 +1,5 @@
 @extends('layouts.app', [
-    'class' => 'sidebar-mini ',
+  'class' => 'User',
     'namePage' => 'Users',
     'activePage' => 'Users',
     'activeNav' => '',
@@ -31,6 +31,7 @@
                   <th>Profile</th>
                   <th>Name</th>
                   <th>Email</th>
+                  <th>Subscription date</th>
                   <th>Creation date</th>
                   <th class="disabled-sorting text-right">Actions</th>
                 </tr>
@@ -40,6 +41,7 @@
                   <th>Profile</th>
                   <th>Name</th>
                   <th>Email</th>
+                  <th>Subscription date</th>
                   <th>Creation date</th>
                   <th class="disabled-sorting text-right">Actions</th>
                 </tr>
@@ -55,6 +57,7 @@
                     </td>
                     <td>{{$data->name}}</td>
                     <td>{{$data->email}}</td>
+                    <td>{{$data->subscription_date}}</td>
                     <td>{{$data->created_at}}</td>
                     
                       <td class="text-right">
