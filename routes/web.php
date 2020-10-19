@@ -1,3 +1,4 @@
+
 <?php
 
 use Illuminate\Support\Facades\Route;
@@ -50,6 +51,12 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/rooms',  ['as' => 'room.index', 'uses' => 'RoomController@rooms']);
 	Route::post('newRoom/', ['as' => 'room.add', 'uses' => 'RoomController@addNewRoom']);
 	Route::get('getOffice/', ['as' => 'room.getOffice', 'uses' => 'RoomController@getOffice']);
+
+
+	//tables
+	Route::get('/newTable',  'TablesController@newTable');
+	Route::get('/tables',  ['as' => 'table.index', 'uses' => 'TablesController@rooms']);
+	Route::post('newTable/', ['as' => 'table.add', 'uses' => 'TablesController@addNewRoom']);
 
 
 //	Route::resource('user', 'UserController', ['except' => ['show']]);

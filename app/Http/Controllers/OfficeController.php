@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Helpers\Permissions;
 use App\Models\office;
 use App\Models\officeName;
+use App\Models\Country;
 
 class OfficeController extends Controller
 {
@@ -24,11 +25,12 @@ class OfficeController extends Controller
             $q->where('lang_id',$lang);
             
             // $q->addSelect('?')
-        }])->with(['officeCountry' => function ($q) use ($lang) {
-            
-            
+        }])->with(['countryLang' => function ($q) use ($lang) {
+            // $q->addSelect('?')
+        }])->with(['provinceLang' => function ($q) use ($lang) {
             // $q->addSelect('?')
         }])->where('active',1)->get();
+        //return $offices;
         //return $offices;
         return view('offices.index', compact('offices'));
     }
@@ -45,7 +47,14 @@ class OfficeController extends Controller
     public function newOffice(){
         Permissions::checkActive();
         Permissions::havePermission("addOffice");
-        return view('offices.add');
+        $lang=1;
+
+        $country = Country::with(['countryLang' => function ($q) use ($lang) {
+            $q->where('id_lang',$lang);
+            // $q->addSelect('?')
+        }])
+        ->get();
+        return view('offices.add',compact('country'));
     }
 
     public function addNewOffice(Request $request)

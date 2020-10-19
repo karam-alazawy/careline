@@ -12,6 +12,7 @@ use App\Models\users;
 use App\Models\office;
 use App\Models\Subscription;
 use App\Models\SubscriptionName;
+use App\Models\Country;
 
 use Carbon\Carbon;
 
@@ -62,13 +63,20 @@ class UserController extends Controller
           $lang=1;
           // $offices = office::join('office_bnames', 'offices.id', '=', 'office_names.office_id')->select("office_name","offices.id")->where('active',1)->get();
           $offices = office::with(['officeLang' => function ($q) use ($lang) {
-              $q->where('lang_id',$lang);
-              // $q->addSelect('?')
-          }])
-          ->get();
+            $q->where('lang_id',$lang);
+            // $q->addSelect('?')
+        }])
+        ->get();
+
+        $country = Country::with(['countryLang' => function ($q) use ($lang) {
+            $q->where('id_lang',$lang);
+            // $q->addSelect('?')
+        }])
+        ->get();
+        //return $country;
        // return $offices->officeLang->office_id;
           // return view('users.add',['offices' => $offices]);
-           return view('users.add',compact('offices'));
+           return view('users.add',compact('offices','country'));
   
       }
 

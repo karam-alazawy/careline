@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 
-class Country extends Model
+class SupplierDelivery extends Model
 {
     //    use SoftDeletes;
     /**
@@ -12,14 +13,14 @@ class Country extends Model
      *
      * @var string
      */
-    protected $table         = 'country';
-    protected $primaryKey    = 'id_country';
+    protected $table         = 'supplier_delivery';
+    protected $primaryKey    = 'id_supplier_delivery';
     /**
      * Indicates if the model should be timestamped.
      *
      * @var bool
      */
-    public $timestamps = false;
+    public $timestamps = true;
 
     /**
      * The storage format of the model's date columns.
@@ -41,7 +42,7 @@ class Country extends Model
      * @var array
      */
     protected $fillable = [
-        'id_zone' , 'id_currency' , 'iso_code' , 'call_prefix' , 'active' , 'contains_states' , 'need_identification_number' , 'need_zip_code' , 'zip_code_format' , 'display_tax_label'
+        'id_supplier' , 'active'
     ];
 
     /**
@@ -54,17 +55,13 @@ class Country extends Model
      * Relation with other models to relation data through it.
      */
 
-    public function countryLang()
-    {
-        return $this->hasOne('App\Models\CountryLang','id_country','id_country');
-    }
+     public function deliveryDetails()
+     {
+        return $this->hasMany(SupplierDeliveryDetails::class,'id_supplier_delivery','id_supplier_delivery');
+     }
 
-    public function zone()
-    {
-        return $this->belongsTo('App\Models\Zone','id_zone','id_zone');
-    }
-    public function currency()
-    {
-        return $this->hasOne('App\Models\Currency','id_currency','id_currency');
-    }
+     public function supplier()
+     {
+        return $this->hasOne(User::class,'id','id_supplier');
+     }
 }

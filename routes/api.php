@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Models\Province;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,4 +17,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
+});
+Route::get('/getProvince', function (Request $request) {
+    $lang=1;
+    $province = Province::with(['provinceLang' => function ($q) use ($lang) {
+        $q->where('id_lang',$lang);
+        // $q->addSelect('?')
+    }])->where('id_country',$request['id'])->get();
+    return $province;
 });

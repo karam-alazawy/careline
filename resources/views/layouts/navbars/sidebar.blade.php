@@ -1,3 +1,14 @@
+<style>
+#ofBar {
+    display:none!important;
+}
+.main-panel {
+/* display: none !important; */
+}
+li.active-pro {
+    display: none!important;
+}
+</style>
 <div class="sidebar" data-color="orange">
   <!--
     Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
@@ -127,6 +138,79 @@
           </ul>
         </div>
       
+        </li>
+
+
+
+        <li>
+        <a data-toggle="collapse" href="#rooms">
+            <i class="now-ui-icons business_bank"></i>
+          <p>
+            {{ __("Rooms") }}
+            <b class="caret"></b>
+          </p>
+        </a>
+        
+        <div class="collapse show" id="rooms">
+          <ul class="nav">
+          <li class="@if ($activePage == 'newRoom') active @endif">
+              <a href="{{ route('room.add') }}">
+                <i class="now-ui-icons objects_key-25"></i>
+                <p> {{ __("Add Room") }} </p>
+              </a>
+          </li>  
+            <!-- 
+               <li class="@if ($activePage == 'profile') active @endif">
+              <a href="{{ route('profile.edit') }}">
+                <i class="now-ui-icons users_single-02"></i>
+                <p> {{ __("User Profile") }} </p>
+              </a>
+            </li> -->
+            <li class="@if ($activePage == 'Rooms') active @endif">
+              <a href="{{ route('room.getOffice') }}">
+                <i class="now-ui-icons design_bullet-list-67"></i>
+                <p> {{ __("Rooms Management") }} </p>
+              </a>
+            </li>
+          </ul>
+        </div>
+        </li>
+
+
+
+
+        <li>
+        <a data-toggle="collapse" href="#tables">
+            <i class="now-ui-icons business_bank"></i>
+          <p>
+            {{ __("Tables") }}
+            <b class="caret"></b>
+          </p>
+        </a>
+        
+        <div class="collapse show" id="tables">
+          <ul class="nav">
+          <li class="@if ($activePage == 'newTable') active @endif">
+              <a href="{{ route('table.add') }}">
+                <i class="now-ui-icons objects_key-25"></i>
+                <p> {{ __("Add tables") }} </p>
+              </a>
+          </li>  
+            <!-- 
+               <li class="@if ($activePage == 'profile') active @endif">
+              <a href="{{ route('profile.edit') }}">
+                <i class="now-ui-icons users_single-02"></i>
+                <p> {{ __("User Profile") }} </p>
+              </a>
+            </li> -->
+            <li class="@if ($activePage == 'Tables') active @endif">
+              <a href="{{ route('table.index') }}">
+                <i class="now-ui-icons design_bullet-list-67"></i>
+                <p> {{ __("Tables Management") }} </p>
+              </a>
+            </li>
+          </ul>
+        </div>
         </li>
 
 

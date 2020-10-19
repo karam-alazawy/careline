@@ -4,16 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Country extends Model
+class ProvinceLang extends Model
 {
-    //    use SoftDeletes;
+      //    use SoftDeletes;
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table         = 'country';
-    protected $primaryKey    = 'id_country';
+    protected $table         = 'province_lang';
+    protected $primaryKey    = 'id_province';
     /**
      * Indicates if the model should be timestamped.
      *
@@ -41,7 +41,7 @@ class Country extends Model
      * @var array
      */
     protected $fillable = [
-        'id_zone' , 'id_currency' , 'iso_code' , 'call_prefix' , 'active' , 'contains_states' , 'need_identification_number' , 'need_zip_code' , 'zip_code_format' , 'display_tax_label'
+        'id_province' , 'id_lang' , 'name' , 'active'
     ];
 
     /**
@@ -53,18 +53,12 @@ class Country extends Model
     /**
      * Relation with other models to relation data through it.
      */
-
-    public function countryLang()
+    public function lang()
     {
-        return $this->hasOne('App\Models\CountryLang','id_country','id_country');
+        return $this->hasOne('App\Models\System\Language','id_lang','id_lang');
     }
-
-    public function zone()
+    public function province()
     {
-        return $this->belongsTo('App\Models\Zone','id_zone','id_zone');
-    }
-    public function currency()
-    {
-        return $this->hasOne('App\Models\Currency','id_currency','id_currency');
+        return $this->belongsTo(Province::class,'id_province','id_province');
     }
 }

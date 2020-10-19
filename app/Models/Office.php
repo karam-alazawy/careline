@@ -22,8 +22,13 @@ class Office extends Model
         return $this->hasOne(OfficeName::class,'office_id','id');
     }
 
-    public function officeCountry()
+    public function countryLang()
     {
-        return $this->hasOne(Country::class,'id','office_country');
+        return $this->hasOne('App\Models\CountryLang','id_country','office_country');
+    }   
+     public function provinceLang()
+    {
+        return $this->hasOne('App\Models\ProvinceLang','id_province','office_province');
     }
+
 }

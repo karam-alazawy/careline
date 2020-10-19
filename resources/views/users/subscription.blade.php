@@ -1,5 +1,5 @@
 @extends('layouts.app', [
-    'class' => 'Subscriptions',
+    'class' => 'sidebar-mini',
     'namePage' => 'User Subscription',
     'activePage' => 'userSubscription',
     'activeNav' => '',

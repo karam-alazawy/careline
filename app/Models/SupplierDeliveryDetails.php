@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Country extends Model
+class SupplierDeliveryDetails extends Model
 {
     //    use SoftDeletes;
     /**
@@ -12,14 +12,14 @@ class Country extends Model
      *
      * @var string
      */
-    protected $table         = 'country';
-    protected $primaryKey    = 'id_country';
+    protected $table         = 'supplier_delivery_details';
+    protected $primaryKey    = 'id_supplier_delivery_details';
     /**
      * Indicates if the model should be timestamped.
      *
      * @var bool
      */
-    public $timestamps = false;
+    public $timestamps = true;
 
     /**
      * The storage format of the model's date columns.
@@ -41,8 +41,19 @@ class Country extends Model
      * @var array
      */
     protected $fillable = [
-        'id_zone' , 'id_currency' , 'iso_code' , 'call_prefix' , 'active' , 'contains_states' , 'need_identification_number' , 'need_zip_code' , 'zip_code_format' , 'display_tax_label'
+        'id_supplier_delivery' ,
+        'id_country' ,
+        'id_province' ,
+        'id_sub_state' ,
+
+        'per_weight' ,
+        'shipping_cost_weight' ,
+        'per_measurement' ,
+        'shipping_cost_measurement' ,
+
+        'delivery_days'
     ];
+
 
     /**
      * Validation that check request.
@@ -54,17 +65,17 @@ class Country extends Model
      * Relation with other models to relation data through it.
      */
 
-    public function countryLang()
+    public function subState()
     {
-        return $this->hasOne('App\Models\CountryLang','id_country','id_country');
+        return $this->hasOne('App\Models\System\Location\SubState','id_sub_state','id_sub_state');
+    }
+    public function province()
+    {
+        return $this->hasOne('App\Models\System\Location\Province','id_province','id_province');
     }
 
-    public function zone()
+    public function supplierDelivery()
     {
-        return $this->belongsTo('App\Models\Zone','id_zone','id_zone');
-    }
-    public function currency()
-    {
-        return $this->hasOne('App\Models\Currency','id_currency','id_currency');
+        return $this->belongsTo(SupplierDelivery::class,'id_supplier_delivery','id_supplier_delivery');
     }
 }

@@ -1,4 +1,15 @@
 <!-- Navbar -->
+<style>
+#ofBar {
+    display:none!important;
+}
+.main-panel {
+/* display: none !important; */
+}
+li.active-pro {
+    display: none!important;
+}
+</style>
 <nav class="navbar navbar-expand-lg navbar-transparent  bg-primary  navbar-absolute">
   <div class="container-fluid">
     <div class="navbar-wrapper">

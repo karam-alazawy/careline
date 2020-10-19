@@ -12,4 +12,7 @@ class OfficeName extends Model
         'office_id',
         'lang_id',
        ];
+
+
+    
 }
