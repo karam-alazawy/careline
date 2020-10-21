@@ -1,8 +1,8 @@
 @extends('layouts.app', [
-    'class' => 'sidebar-mini ',
-    'namePage' => 'Add Office',
-    'activePage' => 'newOffice',
-    'activeNav' => '2',
+  'class' => 'Customer',
+    'namePage' => 'Add Customer',
+    'activePage' => 'newCustomer',
+    'activeNav' => '',
 ])
 
 @section('content')
@@ -13,10 +13,10 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            <h5 class="title">{{__("Add Office")}}</h5>
+            <h5 class="title">{{__("Add Customer")}}</h5>
           </div>
           <div class="card-body">
-            <form method="post" action="{{ route('office.add') }}" autocomplete="off"
+            <form method="post" action="{{ route('customer.add') }}" autocomplete="off"
             enctype="multipart/form-data">
               @csrf
               @method('post')
@@ -26,17 +26,35 @@
                 <div class="row">
                     <div class="col-md-7 pr-1">
                         <div class="form-group">
-                            <label>{{__("Office Name")}}</label>
+                            <label>{{__(" Name")}}</label>
                                 <input type="text" name="name" class="form-control" value="">
                                 @include('alerts.feedback', ['field' => 'name'])
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                
-                              
+                  <div class="col-md-7 pr-1">
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">{{__(" Email address")}}</label>
+                      <input type="email" name="email" class="form-control" placeholder="Email" value="">
+                      @include('alerts.feedback', ['field' => 'email'])
+                    </div>
+                  </div>
+                </div>                
+                <div class="row">
+                  <div class="col-md-7 pr-1">
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">{{__(" Password")}}</label>
+                      <input type="password" name="password" class="form-control" placeholder="******" value="">
+                      @include('alerts.feedback', ['field' => 'Password'])
+                    </div>
+                  </div>
+                </div>                
+                <div class="row">
                 <div class="col-md-7 pr-1">
-                <div class="form-group">
+            
+
+                    <div class="form-group">
                     <label for="exampleInputEmail1">{{__(" Country and Province")}}</label>
                      <div class="row">
                      <div class="col-xs-4 officeSelect">
@@ -59,8 +77,19 @@
                       
                     </div>
                     </div>
-                                                
-              
+                  </div>
+               
+                </div>
+
+                <div class="row">
+                  <div class="col-md-7 pr-1">
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">{{__(" Phone Number")}}</label>
+                      <input type="Number" name="phone" class="form-control" placeholder="Phone" value="">
+                      @include('alerts.feedback', ['field' => 'Phone'])
+                    </div>
+                  </div>
+                </div> 
               <div class="card-footer ">
                 <button type="submit" class="btn btn-primary btn-round">{{__('Add')}}</button>
               </div>
@@ -81,7 +110,7 @@ option{
   border-radius: 31px;
     margin: 5px;
     height: 17px;
-    width: 35px;
+    width: 15px;
     padding-left: 17px;
     padding-right: 0px;
 }
@@ -90,9 +119,17 @@ select:-internal-list-box option:checked {
     color: rgb(16, 16, 16) !important;
 
 }
-
+#multiselect{    
+  text-align: center;
+  height: 103px;
+}
+.multiselect{    
+    margin-left: 16px;
+    margin-right: auto;
+    width: 200px;
+   
+  }
   .officeSelect{ margin-left: 16px;}
-
     </style>
 
 
@@ -105,7 +142,7 @@ function getProvince() {
       url: "/api/getProvince?id="+x,
       context: document.body
     }).done(function(e) {
-        $("#province").html("");
+      $("#province").html("");
 
      // console.log(e[0]['id_province']);
       e.forEach(element => {

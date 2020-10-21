@@ -3,7 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\Province;
-
+use App\Models\Room;
+use App\Models\Table;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -23,6 +24,25 @@ Route::get('/getProvince', function (Request $request) {
     $province = Province::with(['provinceLang' => function ($q) use ($lang) {
         $q->where('id_lang',$lang);
         // $q->addSelect('?')
-    }])->where('id_country',$request['id'])->get();
+    }])->where('id_country',$request['id'])->where('active',1)->get();
     return $province;
+});
+
+Route::get('/getRooms', function (Request $request) {
+    $lang=1;
+    $rooms = Room::with(['roomLang' => function ($q) use ($lang) {
+        $q->where('lang_id',$lang);
+        // $q->addSelect('?')
+    }])->where('office_id',$request['id'])->where('active',1)->get();
+    return $rooms;
+});
+
+
+Route::get('/getTables', function (Request $request) {
+    $lang=1;
+    $tables = Table::with(['tableLang' => function ($q) use ($lang) {
+        $q->where('lang_id',$lang);
+        // $q->addSelect('?')
+    }])->where('room_id',$request['id'])->get();
+    return $tables;
 });

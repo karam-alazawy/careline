@@ -29,6 +29,8 @@ li.active-pro {
           <p>{{ __('Dashboard') }}</p>
         </a>
       </li>
+
+      
       <li>
         <a data-toggle="collapse" href="#laravelExamples">
             <i class="now-ui-icons  users_circle-08"></i>
@@ -64,6 +66,48 @@ li.active-pro {
                 <p> {{ __("Inactive Users") }} </p>
               </a>
             </li>
+          </ul>
+        </div>
+        </li>
+
+
+
+ 
+        <li>
+        <a data-toggle="collapse" href="#Customers">
+            <i class="now-ui-icons  users_circle-08"></i>
+          <p>
+            {{ __("Customers") }}
+            <b class="caret"></b>
+          </p>
+        </a>
+        <div class="collapse show" id="Customers">
+          <ul class="nav">
+          <li class="@if ($activePage == 'newCustomer') active @endif">
+              <a href="{{ route('customer.add') }}">
+                <i class="now-ui-icons users_single-02"></i>
+                <p> {{ __("Add Customer") }} </p>
+              </a>
+              </li>  
+            <!-- 
+               <li class="@if ($activePage == 'profile') active @endif">
+              <a href="{{ route('profile.edit') }}">
+                <i class="now-ui-icons users_single-02"></i>
+                <p> {{ __("User Profile") }} </p>
+              </a>
+            </li> -->
+            <li class="@if ($activePage == 'Customers') active @endif">
+              <a href="{{ route('customer.index') }}">
+                <i class="now-ui-icons design_bullet-list-67"></i>
+                <p> {{ __("Customers Management") }} </p>
+              </a>
+            </li>
+            <!-- <li class="@if ($activePage == 'inactiveUsers') active @endif">
+              <a href="{{ route('user.inactive') }}">
+                <i class="now-ui-icons design_bullet-list-67"></i>
+                <p> {{ __("Inactive Customers") }} </p>
+              </a>
+            </li> -->
           </ul>
         </div>
         </li>
@@ -176,7 +220,7 @@ li.active-pro {
         </div>
         </li>
 
-
+<!-- 
 
 
         <li>
@@ -196,13 +240,12 @@ li.active-pro {
                 <p> {{ __("Add tables") }} </p>
               </a>
           </li>  
-            <!-- 
                <li class="@if ($activePage == 'profile') active @endif">
               <a href="{{ route('profile.edit') }}">
                 <i class="now-ui-icons users_single-02"></i>
                 <p> {{ __("User Profile") }} </p>
               </a>
-            </li> -->
+            </li> 
             <li class="@if ($activePage == 'Tables') active @endif">
               <a href="{{ route('table.index') }}">
                 <i class="now-ui-icons design_bullet-list-67"></i>
@@ -212,24 +255,24 @@ li.active-pro {
           </ul>
         </div>
         </li>
-
+ -->
 
 
         <li>
-        <a data-toggle="collapse" href="#rooms">
+        <a data-toggle="collapse" href="#Booking">
             <i class="now-ui-icons business_bank"></i>
           <p>
-            {{ __("Rooms") }}
+            {{ __("Booking") }}
             <b class="caret"></b>
           </p>
         </a>
         
-        <div class="collapse show" id="rooms">
+        <div class="collapse show" id="Booking">
           <ul class="nav">
-          <li class="@if ($activePage == 'newRoom') active @endif">
-              <a href="{{ route('room.add') }}">
+          <li class="@if ($activePage == 'newBooking') active @endif">
+              <a href="{{ route('booking.getCustomer') }}">
                 <i class="now-ui-icons objects_key-25"></i>
-                <p> {{ __("Add Room") }} </p>
+                <p> {{ __("Add Booking") }} </p>
               </a>
           </li>  
             <!-- 
@@ -239,10 +282,10 @@ li.active-pro {
                 <p> {{ __("User Profile") }} </p>
               </a>
             </li> -->
-            <li class="@if ($activePage == 'Rooms') active @endif">
-              <a href="{{ route('room.getOffice') }}">
+            <li class="@if ($activePage == 'booking') active @endif">
+              <a href="{{ route('booking.index') }}">
                 <i class="now-ui-icons design_bullet-list-67"></i>
-                <p> {{ __("Rooms Management") }} </p>
+                <p> {{ __("Booking Management") }} </p>
               </a>
             </li>
           </ul>

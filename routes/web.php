@@ -33,11 +33,17 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/inactive',  ['as' => 'user.inactive', 'uses' => 'UserController@inactive']);
 	Route::get('/activeUser/{id}', ['as' => 'user.activeUser', 'uses' => 'UserController@activeUser']);
 	Route::post('newUser/', ['as' => 'user.add', 'uses' => 'UserController@addNewUser']);
-	Route::get('userSubscription/', ['as' => 'user.userSubscription', 'uses' => 'UserController@userSubscription']);
-	Route::get('addSubscription/', ['as' => 'user.addSubscription', 'uses' => 'UserController@addSubscription']);
-	Route::post('addNewSubscription/', ['as' => 'user.addNewSubscription', 'uses' => 'UserController@addNewSubscription']);
-	Route::post('renewalSubscription/', ['as' => 'user.renewalSubscription', 'uses' => 'UserController@renewalSubscription']);
-	Route::get('subscriptions/', ['as' => 'user.subscriptions', 'uses' => 'UserController@subscriptions']);
+
+
+	//customers
+	Route::post('renewalSubscription/', ['as' => 'customer.renewalSubscription', 'uses' => 'CustomerController@renewalSubscription']);
+	Route::get('/newCustomer',  'CustomerController@newCustomer');
+	Route::post('newCustomer/', ['as' => 'customer.add', 'uses' => 'CustomerController@addNewCustomer']);
+	Route::get('/customers',  ['as' => 'customer.index', 'uses' => 'CustomerController@customers']);
+	Route::get('customerSubscription/', ['as' => 'customer.customerSubscription', 'uses' => 'CustomerController@customerSubscription']);
+	Route::get('subscriptions/', ['as' => 'user.subscriptions', 'uses' => 'CustomerController@subscriptions']);
+	Route::get('addSubscription/', ['as' => 'user.addSubscription', 'uses' => 'CustomerController@addSubscription']);
+	Route::post('addNewSubscription/', ['as' => 'user.addNewSubscription', 'uses' => 'CustomerController@addNewSubscription']);
 	
 	//office
 	Route::get('/newOffice',  'OfficeController@newOffice');
@@ -55,10 +61,18 @@ Route::group(['middleware' => 'auth'], function () {
 
 	//tables
 	Route::get('/newTable',  'TablesController@newTable');
-	Route::get('/tables',  ['as' => 'table.index', 'uses' => 'TablesController@rooms']);
-	Route::post('newTable/', ['as' => 'table.add', 'uses' => 'TablesController@addNewRoom']);
+	Route::get('/tables',  ['as' => 'table.index', 'uses' => 'TablesController@tables']);
+	Route::post('newTable/', ['as' => 'table.add', 'uses' => 'TablesController@addnewTable']);
 
 
+	//BookingController
+	Route::get('/newBooking',  'BookingController@newBooking');
+	Route::get('/booking',  ['as' => 'booking.index', 'uses' => 'BookingController@booking']);
+	Route::post('newBooking/', ['as' => 'booking.add', 'uses' => 'BookingController@addNewBooking']);
+	Route::get('getCustomer/', ['as' => 'booking.getCustomer', 'uses' => 'BookingController@getCustomer']);
+	Route::get('newBooking/', ['as' => 'booking.add', 'uses' => 'BookingController@newBooking']);
+
+	
 //	Route::resource('user', 'UserController', ['except' => ['show']]);
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
 	Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);

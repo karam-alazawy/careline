@@ -16,7 +16,7 @@
             <h5 class="title">{{__("Choose Office")}}</h5>
           </div>
           <div class="card-body">
-            <form method="post" action="{{ route('room.index') }}" autocomplete="off"
+            <form method="get" action="{{ route('booking.add') }}" autocomplete="off"
             enctype="multipart/form-data">
               @csrf
               @method('get')
@@ -25,19 +25,19 @@
                 <div class="row">
                 <div class="col-md-7 pr-1">
                     <div class="form-group">
-                    <label for="exampleInputEmail1">{{__(" Office")}}</label>
+                    <label for="exampleInputEmail1">{{__(" Customers")}}</label>
                      <div class="row">
                       <div class="col-xs-5 officeSelect">
-                        <select name="office" id="officeSelect" class="form-control">
-                        @foreach($offices as $key => $data)
-                          <option value="{{$data->id}}">{{$data->officeLang->office_name}}</option>
+                        <select name="customer_id" id="officeSelect" class="form-control">
+                        @foreach($customer as $key => $data)
+                          <option value="{{$data->id}}">{{$data->name}}</option>
                           @endforeach
                         </select>
                       </div>
                     </div>
                     </div>
               <div class="card-footer ">
-                <button type="submit" class="btn btn-primary btn-round">{{__('Show Rooms')}}</button>
+                <button type="submit" class="btn btn-primary btn-round">{{__('Next')}}</button>
               </div>
               <hr class="half-rule"/>
             </form>

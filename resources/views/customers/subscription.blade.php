@@ -13,10 +13,10 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            <h5 class="title">{{__(" User Subscription")}}</h5>
+            <h5 class="title">{{__(" Customer Subscription")}}</h5>
           </div>
           <div class="card-body">
-            <form method="post" action="{{ route('user.renewalSubscription') }}" autocomplete="off"
+            <form method="post" action="{{ route('customer.renewalSubscription') }}" autocomplete="off"
             enctype="multipart/form-data">
               @csrf
               @method('post')

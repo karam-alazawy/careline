@@ -16,7 +16,7 @@
             <h5 class="title">{{__("Add Table")}}</h5>
           </div>
           <div class="card-body">
-            <form method="post" action="{{ route('room.add') }}" autocomplete="off"
+            <form method="post" action="{{ route('table.add') }}" autocomplete="off"
             enctype="multipart/form-data">
               @csrf
               @method('post')
@@ -34,27 +34,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                
-                              
-                <div class="col-md-7 pr-1">
-                    <div class="form-group">
-                    <label for="exampleInputEmail1">{{__(" Room")}}</label>
-                     <div class="row">
-                      <div class="col-xs-5 officeSelect">
-                        <select name="office" id="officeSelect" class="form-control">
-                        @foreach($offices as $key => $data)
-
-                          <option value="{{$data->id}}">{{$data->officeLang->office_name}}</option>
-
-                          @endforeach
-                        </select>
-                      </div>
-                    </div>
-                    </div>
-                                                  
+             
+                                 
                
-
+<input hidden type="text" name="room_id" value="{{$room_id}}">
                                                 
               
               <div class="card-footer ">
