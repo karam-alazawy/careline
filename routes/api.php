@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Province;
 use App\Models\Room;
 use App\Models\Table;
+use App\Models\Reservation;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -37,7 +38,6 @@ Route::get('/getRooms', function (Request $request) {
     return $rooms;
 });
 
-
 Route::get('/getTables', function (Request $request) {
     $lang=1;
     $tables = Table::with(['tableLang' => function ($q) use ($lang) {
@@ -45,4 +45,11 @@ Route::get('/getTables', function (Request $request) {
         // $q->addSelect('?')
     }])->where('room_id',$request['id'])->get();
     return $tables;
+});
+
+Route::get('/getReservations', function (Request $request) {
+   
+$reservations = Reservation::where("table_id",$request['id'])
+->get();
+    return $reservations;
 });

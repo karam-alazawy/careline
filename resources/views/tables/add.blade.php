@@ -23,7 +23,7 @@
               @include('alerts.success')
               <div class="row">
               </div>
-                <div class="row">
+              <div class="row">
                     <div class="col-md-7 pr-1">
                         <div class="form-group">
                             <label>{{__("Table Name")}}</label>
@@ -31,6 +31,31 @@
                                 <input type="text" name="name" class="form-control" value="">
 
                                 @include('alerts.feedback', ['field' => 'name'])
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-7 pr-1">
+                        <div class="form-group">
+                            <label>{{__("Open At")}}</label>
+
+                                <input  type="time" name="open_at" class="form-control" value="">
+
+                                @include('alerts.feedback', ['field' => 'open_at'])
+                        </div>
+                    </div>
+                </div>
+             
+
+                <div class="row">
+                    <div class="col-md-7 pr-1">
+                        <div class="form-group">
+                            <label>{{__("Close At")}}</label>
+
+                                <input type="time" name="close_at" class="form-control" value="">
+
+                                @include('alerts.feedback', ['field' => 'close_at'])
                         </div>
                     </div>
                 </div>

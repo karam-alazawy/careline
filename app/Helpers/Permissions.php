@@ -17,6 +17,17 @@ class Permissions
         return true;
 
     }
+    public static function haveAllPermission()
+    {
+        $permissions = DB::table('users')->select('permissions')->where('id',auth()->user()->id)->get()->first();
+        $permissions=$permissions->{'permissions'};
+        $permissions = explode(',', $permissions);
+        if (!in_array('allPermissions',$permissions,true)) {
+            return false;
+        }
+        return true;
+
+    }
     public static function checkActive()
     {
         if (!auth()->user()->active) {

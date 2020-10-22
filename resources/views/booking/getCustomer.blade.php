@@ -1,7 +1,7 @@
 @extends('layouts.app', [
     'class' => 'sidebar-mini ',
-    'namePage' => 'Edit Rooms',
-    'activePage' => 'Rooms',
+    'namePage' => 'Booking',
+    'activePage' => 'newBooking',
     'activeNav' => '2',
 ])
 
@@ -13,7 +13,7 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            <h5 class="title">{{__("Choose Office")}}</h5>
+            <h5 class="title">{{__("Choose Customer")}}</h5>
           </div>
           <div class="card-body">
             <form method="get" action="{{ route('booking.add') }}" autocomplete="off"

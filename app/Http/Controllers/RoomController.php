@@ -13,14 +13,17 @@ class RoomController extends Controller
 {
     public function newRoom(){
         Permissions::checkActive();
+        $checkNeed= Permissions::haveAllPermission();
 
-
+        $province=auth()->user()->province;
         $lang=1;
         // $offices = office::join('office_bnames', 'offices.id', '=', 'office_names.office_id')->select("office_name","offices.id")->where('active',1)->get();
         $offices = office::with(['officeLang' => function ($q) use ($lang) {
             $q->where('lang_id',$lang);
             // $q->addSelect('?')
-        }])->get();
+        }])->when(!$checkNeed,function ($q) use ($province){
+            $q->where('office_province',$province);
+        })->get();
         Permissions::havePermission("addRoom");
         return view('rooms.add',compact('offices'));
 
@@ -70,11 +73,16 @@ class RoomController extends Controller
     public function getOffice()
         {
         $lang=1;
+        $checkNeed= Permissions::haveAllPermission();
+        $province=auth()->user()->province;
+        //return $province;
         // $offices = office::join('office_bnames', 'offices.id', '=', 'office_names.office_id')->select("office_name","offices.id")->where('active',1)->get();
         $offices = office::with(['officeLang' => function ($q) use ($lang) {
             $q->where('lang_id',$lang);
             // $q->addSelect('?')
-        }])->get();
+        }])->when(!$checkNeed,function ($q) use ($province){
+            $q->where('office_province',$province);
+        })->get();
         Permissions::havePermission("addRoom");
         return view('rooms.edit',compact('offices'));
 

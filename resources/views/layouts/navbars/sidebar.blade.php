@@ -282,12 +282,12 @@ li.active-pro {
                 <p> {{ __("User Profile") }} </p>
               </a>
             </li> -->
-            <li class="@if ($activePage == 'booking') active @endif">
+            <!-- <li class="@if ($activePage == 'booking') active @endif">
               <a href="{{ route('booking.index') }}">
                 <i class="now-ui-icons design_bullet-list-67"></i>
                 <p> {{ __("Booking Management") }} </p>
               </a>
-            </li>
+            </li> -->
           </ul>
         </div>
         </li>

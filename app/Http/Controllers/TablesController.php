@@ -24,10 +24,14 @@ class TablesController extends Controller
     {
         Permissions::checkActive();
         Permissions::havePermission("addTable");
+        return $request['open_at'];
         $table = Table::create([
             'room_id' => $request['room_id'],
+            'open_at' => $request['open_at'],
+            'close_at' => $request['close_at'],
             'addedByUserId' => auth()->user()->id
-            ]);
+            ]);        
+
             if ($table) {
                 $id=$table->id;
                 for ($i=1; $i <4 ; $i++) { 

@@ -10,7 +10,8 @@ class Table extends Model
     protected $fillable = [
         'room_id',
         'addedByUserId',
-        'booking_at',
+        'open_at',
+        'close_at',
         'updated_at',
         'created_at',
 

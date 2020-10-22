@@ -1,6 +1,9 @@
 ALTER TABLE `users` ADD COLUMN `permissions` TEXT NULL DEFAULT NULL;
 ALTER TABLE `users` ADD COLUMN `active` tinyint(1) NOT NULL DEFAULT '0';
 ALTER TABLE `users` ADD COLUMN `office_id` int(11) NOT NULL;
+ALTER TABLE `users` ADD COLUMN `country` int(11) NOT NULL;
+ALTER TABLE `users` ADD COLUMN `province` int(11) NOT NULL;
+
 -- ALTER TABLE `users` ADD COLUMN `subscription_date` TIMESTAMP NULL;
 
 
@@ -175,10 +178,11 @@ INSERT INTO `zone` VALUES (1,'Europe',1),(2,'North America',1),(3,'Asia',1),(4,'
 
 CREATE TABLE `tables` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `room_id` VARCHAR(150) NULL,
-  `booking_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `room_id` int(11) NOT NULL ,
+  `open_at` TIME,
+  `close_at` TIME,
   `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `active` tinyint(1) NOT NULL DEFAULT '1',
   `addedByUserId` int(11) NOT NULL ,
 
@@ -199,18 +203,35 @@ CREATE TABLE `table_names` (
 
 CREATE TABLE `customers` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(150) NULL,
-  `email` VARCHAR(150) NULL,
+  `name` VARCHAR(150) NOT NULL,
+  `email` VARCHAR(150) NOT NULL,
   `password` VARCHAR(250) NULL,
-  `office_province` int(11) NOT NULL ,
   `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `active` tinyint(1) NOT NULL DEFAULT '0',
+  `active` tinyint(1) NOT NULL DEFAULT '1',
   `addedByUserId` int(11) NOT NULL ,
   `country` int(11) NOT NULL ,
   `province` int(11) NOT NULL ,
-  `phone` VARCHAR(50) NULL,
-  `subscription_date` TIMESTAMP NULL;
+  `phone` VARCHAR(50) NOT NULL,
+  `subscription_date` TIMESTAMP NULL,
+  PRIMARY KEY (`id`)
+ 
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
+
+
+
+CREATE TABLE `reservations` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `active` tinyint(1) NOT NULL DEFAULT '1',
+  `addedByUserId` int(11) NOT NULL ,
+  `customer_id` int(11) NOT NULL ,
+  `room_id` int(11) NOT NULL ,
+  `table_id` int(11) NOT NULL ,
+  `date_in` TIMESTAMP NULL,
+  `date_out` TIMESTAMP NULL,
+  
   PRIMARY KEY (`id`)
  
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
