@@ -2,6 +2,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\Office;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,35 @@ Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/customerLogin',function ()
+{
+	if (session('customer')!=null) {
+		$customer=session('customer');
+		$lang=1;
+		$offices = Office::with(['officeLang' => function ($q) use ($lang) {
+			$q->where('lang_id',$lang);
+			// $q->addSelect('?')
+		}])->when(1,function ($q) use ($customer){
+			$q->where('office_province',$customer->province);
+		})
+		->get();
+		$country="s";
+
+		return view('customerUi.home',compact('offices',"country",'customer'));
+	}else
+	return view('customerUi.login');;
+
+});
+Route::get('/customerLogout',function ()
+{
+	Session::forget('customer');
+
+	return view('customerUi.login');;
+
+});
+
+Route::post('customerLogin/', ['as' => 'customer.login', 'uses' => 'CustomerUiController@login']);
+Route::get('customer/', ['as' => 'customer.booking', 'uses' => 'CustomerUiController@addNewBooking']);
 
 Route::group(['middleware' => 'auth'], function () {
 	//users

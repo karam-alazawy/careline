@@ -37,6 +37,11 @@ li.active-pro {
             <i class="now-ui-icons users_circle-08"></i> {{ __("Login") }}
           </a>
         </li>
+        <li class="nav-item @if ($activePage == 'customerLogin') active @endif ">
+          <a href="/customerLogin" class="nav-link">
+            <i class="now-ui-icons users_circle-08"></i> {{ __("Customer") }}
+          </a>
+        </li>
       </ul>
     </div>
   </div>

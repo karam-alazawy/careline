@@ -231,7 +231,8 @@ CREATE TABLE `reservations` (
   `table_id` int(11) NOT NULL ,
   `date_in` TIMESTAMP NULL,
   `date_out` TIMESTAMP NULL,
-  
+  `status` enum('pending','cancel','approve')  NOT NULL DEFAULT 'pending',
+
   PRIMARY KEY (`id`)
  
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;

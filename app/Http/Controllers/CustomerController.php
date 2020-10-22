@@ -68,7 +68,7 @@ class CustomerController extends Controller
                   'country' => $request['country'],
                   'province' => $request['province'],
                   'phone' => $request['phone'],
-                  'password' => Hash::make($request['password']),
+                  'password' => md5($request['password']),
                   'addedByUserId' => auth()->user()->id
                   ]);
                   // if (!$users) {

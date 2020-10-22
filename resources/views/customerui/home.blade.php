@@ -1,8 +1,8 @@
-@extends('layouts.app', [
+@extends('layouts.customer', [
+    'namePage' => '',
     'class' => 'sidebar-mini ',
-    'namePage' => 'Add Booking',
-    'activePage' => 'newBooking',
-    'activeNav' => '2',
+    'activePage' => 'customerBooking',
+    'backgroundImage' => asset('assets') . "/img/bg14.jpg",
 ])
 
 @section('pikkerStyleLink')
@@ -23,6 +23,20 @@ span.input-group-append{
 ul.timeline {
     list-style-type: none;
     position: relative;
+}
+.card {
+    border-radius: 35px;
+}
+.col-md-8{
+    margin-left: auto;
+    margin-right: auto;
+}
+.col-xs-4,
+.col-xs-5,.col-md-7,.row
+{
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 ul.timeline:before {
     content: ' ';
@@ -74,16 +88,16 @@ select:-internal-list-box option:checked {
   </div>
   <div class="content">
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-8">
         <div class="card">
           <div class="card-header">
             <h5 class="title">{{__("Add Booking")}}</h5>
           </div>
           <div class="card-body">
-            <form method="post" action="{{ route('booking.add') }}" autocomplete="off"
+            <form method="get" action="{{ route('customer.booking') }}" autocomplete="off"
             enctype="multipart/form-data">
               @csrf
-              @method('post')
+              @method('get')
               @include('alerts.success')
               <div class="row">
               </div>
@@ -123,7 +137,7 @@ select:-internal-list-box option:checked {
                     <div class="row">
                     <div class="col-md-7 pr-1">
                         <div class="form-group">
-                            <label>{{__("From")}}</label>
+                            <label>{{__("CheckIn")}}</label>
 
                                 <input id="input_11" type="text"  name="date_in" class="form-control" placeholder="2020-10-15 08:03:38">
 
@@ -135,7 +149,7 @@ select:-internal-list-box option:checked {
                 <div class="row">
                     <div class="col-md-7 pr-1">
                         <div class="form-group">
-                            <label>{{__("To")}}</label>
+                            <label>{{__("CheckOut")}}</label>
 
                                 <input  id="input_22"  type="text" name="date_out" class="form-control" placeholder="2020-10-18 11:03:38">
 
@@ -143,20 +157,18 @@ select:-internal-list-box option:checked {
                         </div>
                     </div>
                 </div>
+                <input   type="text" name="customer_id" hidden value="{{$customer->id}}">
                
 
 
 
-	<div class="row">
-		<div class="col-md-8 ">
+		<div style="    display: contents;" class="col-md-8 ">
 			<h4>Reservations</h4>
 			<ul class="timeline" id="timeline">
 		
 			</ul>
 		</div>
-	</div>
 
-          <input hidden type="number" name="customer_id" value="{{$customer_id}}">
                                                 
               
               <div class="card-footer ">
@@ -180,13 +192,13 @@ select:-internal-list-box option:checked {
 
   <script>
         $('#input_11').datetimepicker({
-          format: 'yyyy-mm-dd HH:MM:ss',
+            format: 'yyyy-mm-dd HH:MM:ss',
             uiLibrary: 'bootstrap4',
             modal: true,
             footer: true
         });
         $('#input_22').datetimepicker({
-          format: 'yyyy-mm-dd HH:MM:ss',
+            format: 'yyyy-mm-dd HH:MM:ss',
             uiLibrary: 'bootstrap4',
             modal: true,
             footer: true
