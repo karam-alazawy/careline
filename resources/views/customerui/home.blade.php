@@ -86,10 +86,15 @@ select:-internal-list-box option:checked {
 @section('content')
   <div class="panel-header panel-header-sm">
   </div>
+  
   <div class="content">
     <div class="row">
+
+
       <div class="col-md-8">
         <div class="card">
+        <div style="float: left;margin-left: 30px;margin-top: 10px;color:grey">Your Subscription End In <span style="color:black">{{$customer->subscription_date}}</span></div>
+
           <div class="card-header">
             <h5 class="title">{{__("Add Booking")}}</h5>
           </div>
@@ -101,7 +106,6 @@ select:-internal-list-box option:checked {
               @include('alerts.success')
               <div class="row">
               </div>
-             
                 <div class="row">
                 <div class="col-md-7 pr-1">
                     <div class="form-group">

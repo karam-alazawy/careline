@@ -55,7 +55,6 @@ class CustomerUiController extends Controller
           }
           
           $Reservation = Reservation::create([
-       
               'customer_id' => $request['customer_id'],
               'room_id' => $request['room_id'],
               'table_id' => $request['table_id'],

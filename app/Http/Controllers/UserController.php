@@ -33,21 +33,21 @@ class UserController extends Controller
     }
     public function users(){
         Permissions::checkActive();
-        $users = users::where('active',1)->where( 'id','!=',1)->get();
+        $users = Users::where('active',1)->where( 'id','!=',1)->get();
         Permissions::havePermission("editUsers");
         return view('users.index', ['users' => $users]);
     }
 
     public function inactive(){
         Permissions::checkActive();
-        $users = users::where('active',0)->get();
+        $users = Users::where('active',0)->get();
         Permissions::havePermission("editUsers");
         return view('users.inactive', ['users' => $users]);
     }
     
     public function edituser($id){
         Permissions::checkActive();
-        $user = users::where('id',$id)->get()->first();
+        $user = Users::where('id',$id)->get()->first();
         //return $user->{'name'};
         Permissions::havePermission("editUsers");
         return view('users.edit', ['user' => $user]);
@@ -90,7 +90,7 @@ class UserController extends Controller
         if($request['permissions'])
         $permissions=implode( ",", $request['permissions'] ); 
         try { 
-            $users = users::create([
+            $users = Users::create([
                 'name' => $request['name'],
                 'email' => $request['email'],
                 'office' => $request['office'],
@@ -117,7 +117,7 @@ class UserController extends Controller
     public function activeUser($id)
     {
         Permissions::checkActive();
-        $users = users::where('id', $id)
+        $users = Users::where('id', $id)
         ->update(['active' => 1]);
             return back()->withStatus(__('User Successfully Added.'));
 
