@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Helpers\Permissions;
-use App\Models\office;
-use App\Models\officeName;
+use App\Models\Office;
+use App\Models\OfficeName;
 use App\Models\Country;
 
 class OfficeController extends Controller
@@ -20,8 +20,8 @@ class OfficeController extends Controller
 
        // $offices = Office::where('active',1)->get();
         $lang=1;
-        // $offices = office::join('office_bnames', 'offices.id', '=', 'office_names.office_id')->select("office_name","offices.id")->where('active',1)->get();
-        $offices = office::with(['officeLang' => function ($q) use ($lang) {
+        // $offices = Office::join('office_bnames', 'offices.id', '=', 'office_names.office_id')->select("office_name","offices.id")->where('active',1)->get();
+        $offices = Office::with(['officeLang' => function ($q) use ($lang) {
             $q->where('lang_id',$lang);
             
             // $q->addSelect('?')

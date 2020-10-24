@@ -8,8 +8,8 @@ use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-use App\Models\users;
-use App\Models\office;
+use App\Models\Users;
+use App\Models\Office;
 use App\Models\Subscription;
 use App\Models\SubscriptionName;
 use App\Models\Country;
@@ -61,8 +61,8 @@ class UserController extends Controller
         //     $q->where();
         // })
           $lang=1;
-          // $offices = office::join('office_bnames', 'offices.id', '=', 'office_names.office_id')->select("office_name","offices.id")->where('active',1)->get();
-          $offices = office::with(['officeLang' => function ($q) use ($lang) {
+          // $offices = Office::join('office_bnames', 'offices.id', '=', 'office_names.office_id')->select("office_name","offices.id")->where('active',1)->get();
+          $offices = Office::with(['officeLang' => function ($q) use ($lang) {
             $q->where('lang_id',$lang);
             // $q->addSelect('?')
         }])

@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\officeName;
+use App\Models\OfficeName;
 use App\Models\Country;
 
 class Office extends Model

@@ -35,7 +35,7 @@ class BookingController extends Controller
         $lang=1;
 
         $customer = Customer::get();
-        return view('Booking.getCustomer',compact('customer'));
+        return view('booking.getCustomer',compact('customer'));
     }
 
     public function addNewBooking(Request $request)

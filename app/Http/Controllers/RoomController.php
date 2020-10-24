@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Helpers\Permissions;
-use App\Models\office;
+use App\Models\Office;
 use App\Models\Room;
 use App\Models\RoomName;
 
@@ -17,8 +17,8 @@ class RoomController extends Controller
 
         $province=auth()->user()->province;
         $lang=1;
-        // $offices = office::join('office_bnames', 'offices.id', '=', 'office_names.office_id')->select("office_name","offices.id")->where('active',1)->get();
-        $offices = office::with(['officeLang' => function ($q) use ($lang) {
+        // $offices = Office::join('office_bnames', 'offices.id', '=', 'office_names.office_id')->select("office_name","offices.id")->where('active',1)->get();
+        $offices = Office::with(['officeLang' => function ($q) use ($lang) {
             $q->where('lang_id',$lang);
             // $q->addSelect('?')
         }])->when(!$checkNeed,function ($q) use ($province){
@@ -76,8 +76,8 @@ class RoomController extends Controller
         $checkNeed= Permissions::haveAllPermission();
         $province=auth()->user()->province;
         //return $province;
-        // $offices = office::join('office_bnames', 'offices.id', '=', 'office_names.office_id')->select("office_name","offices.id")->where('active',1)->get();
-        $offices = office::with(['officeLang' => function ($q) use ($lang) {
+        // $offices = Office::join('office_bnames', 'offices.id', '=', 'office_names.office_id')->select("office_name","offices.id")->where('active',1)->get();
+        $offices = Office::with(['officeLang' => function ($q) use ($lang) {
             $q->where('lang_id',$lang);
             // $q->addSelect('?')
         }])->when(!$checkNeed,function ($q) use ($province){
