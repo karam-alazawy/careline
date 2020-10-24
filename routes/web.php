@@ -46,7 +46,7 @@ Route::get('/customerLogout',function ()
 {
 	Session::forget('customer');
 
-	return view('customerUi.login');;
+	return view('customerui.login');;
 
 });
 
