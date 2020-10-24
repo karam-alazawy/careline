@@ -43,7 +43,7 @@ Route::get('/getTables', function (Request $request) {
     $tables = Table::with(['tableLang' => function ($q) use ($lang) {
         $q->where('lang_id',$lang);
         // $q->addSelect('?')
-    }])->where('room_id',$request['id'])->get();
+    }])->where('room_id',$request['id'])->where('active',1)->get();
     return $tables;
 });
 

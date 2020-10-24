@@ -81,7 +81,12 @@ class UserController extends Controller
       }
 
      
-
+public function unactive($id)
+{
+    $user = Users::where('id', $id)
+    ->update(['active' => 0]);
+    return back()->withStatus(__('User Successfully Unactive.'));
+}
     public function addNewUser(Request $request)
     {
         Permissions::checkActive();
@@ -119,7 +124,7 @@ class UserController extends Controller
         Permissions::checkActive();
         $users = Users::where('id', $id)
         ->update(['active' => 1]);
-            return back()->withStatus(__('User Successfully Added.'));
+            return back()->withStatus(__('User Successfully Active.'));
 
     }
  

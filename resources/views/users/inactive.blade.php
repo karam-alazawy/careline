@@ -61,7 +61,7 @@
               
                       <td class="text-right">
                       <a type="button" href="{{ route('user.activeUser',[$data->id]) }}" rel="tooltip" class="btn btn-success btn-icon btn-sm " data-original-title="" title="">
-                        <i class="now-ui-icons ui-2_settings-90"></i>
+                        <i class="now-ui-icons media-1_button-power"></i>
                       </a>
                                                               </td>
                   </tr>@endforeach

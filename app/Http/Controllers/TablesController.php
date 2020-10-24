@@ -24,11 +24,13 @@ class TablesController extends Controller
     {
         Permissions::checkActive();
         Permissions::havePermission("addTable");
-        return $request['open_at'];
+        if(empty($request['room_id']) or empty($request['name']))
+        return back()->withStatus(__('Insert All Information.'));
+
         $table = Table::create([
             'room_id' => $request['room_id'],
-            'open_at' => $request['open_at'],
-            'close_at' => $request['close_at'],
+            'open_at' => 1,
+            'close_at' => 1,
             'addedByUserId' => auth()->user()->id
             ]);        
 

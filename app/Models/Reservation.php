@@ -17,4 +17,16 @@ class Reservation extends Model
         'created_at',
         
        ];
+       public function customerRes()
+       {
+           return $this->hasOne('App\Models\Customer','id','customer_id');
+       }
+       public function roomRes()
+       {
+           return $this->hasOne('App\Models\RoomName','room_id','room_id');
+       }
+       public function tableRes()
+       {
+           return $this->hasOne('App\Models\Table','id','table_id');
+       }
 }

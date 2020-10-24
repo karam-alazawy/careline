@@ -31,7 +31,6 @@
                   <th>Profile</th>
                   <th>Name</th>
                   <th>Email</th>
-                  <th>Subscription date</th>
                   <th>Creation date</th>
                   <th class="disabled-sorting text-right">Actions</th>
                 </tr>
@@ -41,7 +40,6 @@
                   <th>Profile</th>
                   <th>Name</th>
                   <th>Email</th>
-                  <th>Subscription date</th>
                   <th>Creation date</th>
                   <th class="disabled-sorting text-right">Actions</th>
                 </tr>
@@ -57,15 +55,15 @@
                     </td>
                     <td>{{$data->name}}</td>
                     <td>{{$data->email}}</td>
-                    <td>{{$data->subscription_date}}</td>
                     <td>{{$data->created_at}}</td>
                     
                       <td class="text-right">
-                      <a type="button" href="userSubscription?id={{$data->id}}" rel="tooltip" class="btn btn-success btn-icon btn-sm " data-original-title="" title="">
+                   
+                      <!-- <a type="button" href="{{ route('user.edit',[$data->id]) }}" rel="tooltip" class="btn btn-success btn-icon btn-sm " data-original-title="" title="">
                         <i class="now-ui-icons ui-2_settings-90"></i>
-                      </a>
-                      <a type="button" href="{{ route('user.edit',[$data->id]) }}" rel="tooltip" class="btn btn-success btn-icon btn-sm " data-original-title="" title="">
-                        <i class="now-ui-icons ui-2_settings-90"></i>
+                      </a> -->
+                      <a type="button" href="{{ route('user.unactive',[$data->id]) }}" rel="tooltip" class="btn btn-danger btn-icon btn-sm " data-original-title="" title="">
+                        <i class="now-ui-icons media-1_button-power"></i>
                       </a>
                                                               </td>
                   </tr>@endforeach

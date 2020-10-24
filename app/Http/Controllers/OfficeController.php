@@ -36,13 +36,29 @@ class OfficeController extends Controller
     }
     public function editOffice($id){
         Permissions::checkActive();
-
-        $office = Office::where('id',$id)->get()->first();
+        $lang=1;
+        $office = Office::with(['officeLang' => function ($q) use ($lang) {
+            $q->where('lang_id',$lang);
+            // $q->addSelect('?')
+        }])
+        ->where('id',$id)->first();
+        $country = Country::with(['countryLang' => function ($q) use ($lang) {
+            $q->where('id_lang',$lang);
+            // $q->addSelect('?')
+        }])
+        ->get();
         //return $user->{'name'};
         Permissions::havePermission("editUsers");
-        return view('offices.edit', compact('office'));
+        return view('offices.edit', compact('office','country'));
     }
-    
+
+    public function editTheOffice(Request $request,$id)
+    {
+        $Office_name = OfficeName::where('office_id', $id)
+        ->update(['office_name' => $request->name]);
+        return back()->withStatus(__('Office Successfully Update.'));
+       return $request;
+    }
 
     public function newOffice(){
         Permissions::checkActive();
@@ -59,6 +75,9 @@ class OfficeController extends Controller
 
     public function addNewOffice(Request $request)
     {
+        if(empty($request['country']) or empty($request['province']) or empty($request['name']))
+        return back()->withStatus(__('Insert All Information.'));
+
         Permissions::checkActive();
         Permissions::havePermission("addOffice");
         $office = Office::create([
@@ -80,6 +99,13 @@ class OfficeController extends Controller
            
         return back()->withStatus(__('Office successfully added.'));
 
+    }
+
+    public function unactive($id)
+    {
+        $Office = Office::where('id', $id)
+        ->update(['active' => 0]);
+        return back()->withStatus(__('Office Successfully Unactive.'));
     }
  
 }

@@ -34,7 +34,7 @@ Route::get('/customerLogin',function ()
 		}])->when(1,function ($q) use ($customer){
 			$q->where('office_province',$customer->province);
 		})
-		->get();
+		->where('active',1)->get();
 		$country="s";
 
 		return view('customerui.home',compact('offices',"country",'customer'));
@@ -59,10 +59,11 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/editUser/{id}', ['as' => 'user.edit', 'uses' => 'UserController@editUser']);
 	Route::get('/users',  ['as' => 'user.index', 'uses' => 'UserController@users']);
 	Route::get('/inactive',  ['as' => 'user.inactive', 'uses' => 'UserController@inactive']);
+	Route::get('/userUnactive/{id}',  ['as' => 'user.unactive', 'uses' => 'UserController@unactive']);
 	Route::get('/activeUser/{id}', ['as' => 'user.activeUser', 'uses' => 'UserController@activeUser']);
 	Route::post('newUser/', ['as' => 'user.add', 'uses' => 'UserController@addNewUser']);
 
-
+	
 	//customers
 	Route::post('renewalSubscription/', ['as' => 'customer.renewalSubscription', 'uses' => 'CustomerController@renewalSubscription']);
 	Route::get('/newCustomer',  'CustomerController@newCustomer');
@@ -72,19 +73,24 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('subscriptions/', ['as' => 'user.subscriptions', 'uses' => 'CustomerController@subscriptions']);
 	Route::get('addSubscription/', ['as' => 'user.addSubscription', 'uses' => 'CustomerController@addSubscription']);
 	Route::post('addNewSubscription/', ['as' => 'user.addNewSubscription', 'uses' => 'CustomerController@addNewSubscription']);
-	
+	Route::get('/customerUnactive/{id}',  ['as' => 'customer.unactive', 'uses' => 'CustomerController@unactive']);
+
 	//office
 	Route::get('/newOffice',  'OfficeController@newOffice');
 	Route::get('/offices',  ['as' => 'office.index', 'uses' => 'OfficeController@offices']);
 	Route::post('newOffice/', ['as' => 'office.add', 'uses' => 'OfficeController@addNewOffice']);
 	Route::get('/edit/{id}', ['as' => 'office.edit', 'uses' => 'OfficeController@editOffice']);
+	Route::get('/unactive/{id}',  ['as' => 'office.unactive', 'uses' => 'OfficeController@unactive']);
+	Route::put('editOffice/{id}', ['as' => 'office.editTheOffice', 'uses' => 'OfficeController@editTheOffice']);
 
 
 	//rooms
-	Route::get('/newRoom',  'RoomController@newRoom');
-	Route::get('/rooms',  ['as' => 'room.index', 'uses' => 'RoomController@rooms']);
-	Route::post('newRoom/', ['as' => 'room.add', 'uses' => 'RoomController@addNewRoom']);
+	Route::get('/newRoom/{id}',   ['as' => 'room.addRoom', 'uses' => 'RoomController@newRoom']);
+	Route::get('/rooms/{id?}',  ['as' => 'room.index', 'uses' => 'RoomController@rooms']);
+	Route::post('newRoom', ['as' => 'room.add', 'uses' => 'RoomController@addNewRoom']);
 	Route::get('getOffice/', ['as' => 'room.getOffice', 'uses' => 'RoomController@getOffice']);
+	Route::get('/roomUnactive/{id}',  ['as' => 'room.unactive', 'uses' => 'RoomController@unactive']);
+	Route::get('editRoom/{id}', ['as' => 'room.edit', 'uses' => 'RoomController@editRoom']);
 
 
 	//tables

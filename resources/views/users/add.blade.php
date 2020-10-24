@@ -98,8 +98,10 @@
                       <div class="col-xs-5 multiselect">
                         <select name="permissions[]" id="multiselect" class="form-control" size="8" multiple="multiple">
                           <option value="addUser">Add User</option>
-                          <option value="dataEntery">Data Entery</option>
+                          <option value="addCustomer">Add Customer</option>
                           <option value="addRoom">Add Room</option>
+                          <option value="addTable">Add Table</option>
+                          <option value="addReservation">Booking</option>
                         </select>
                       </div>
                       

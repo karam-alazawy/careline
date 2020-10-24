@@ -31,7 +31,12 @@ class CustomerController extends Controller
            return view('customers.add',compact('country'));
   
       }
-
+      public function unactive($id)
+      {
+          $Customer = Customer::where('id', $id)
+          ->update(['active' => 0]);
+          return back()->withStatus(__('Customer Successfully Unactive.'));
+      }
 
       public function customerSubscription(Request $request){
         $id=$request['id'];

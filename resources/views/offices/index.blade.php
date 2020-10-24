@@ -33,6 +33,7 @@
                   <th>Office Country</th>
                   <th>Office Province</th>
                   <th>Creation date</th>
+                  <th class="disabled-sorting text-right">Rooms</th>
                   <th class="disabled-sorting text-right">Actions</th>
                 </tr>
               </thead>
@@ -43,6 +44,7 @@
                   <th>Office Country</th>
                   <th>Office Province</th>
                   <th>Creation date</th>
+                  <th class="disabled-sorting text-right">Rooms</th>
                   <th class="disabled-sorting text-right">Actions</th>
                 </tr>
               </tfoot>
@@ -60,12 +62,16 @@
                     <td>{{$data->provinceLang->name}}</td>
                     <td>{{$data->created_at}}</td>
               
-             
-                 
-                   <td class="text-right">
-                   <a type="button" href="rooms?office={{$data->id}}" rel="tooltip" class="btn btn-info btn-icon btn-sm " data-original-title="" title="">
+                    <td class="text-right">
+                    <a type="button" href="rooms?office={{$data->id}}" rel="tooltip" class="btn btn-info btn-icon btn-sm " data-original-title="" title="">
                         <i class="now-ui-icons business_bank"></i>
                       </a>
+                    </td>
+                 
+                    <td class="text-right">
+                        <a type="button" href="{{ route('office.unactive',[$data->id]) }}" rel="tooltip" class="btn btn-danger btn-icon btn-sm " data-original-title="" title="">
+                        <i class="now-ui-icons media-1_button-power"></i>
+                      </a>                   
                       <a type="button" href="{{ route('office.edit',[$data->id]) }}" rel="tooltip" class="btn btn-success btn-icon btn-sm " data-original-title="" title="">
                         <i class="now-ui-icons ui-2_settings-90"></i>
                       </a>

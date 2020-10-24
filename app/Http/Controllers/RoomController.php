@@ -11,7 +11,8 @@ use App\Models\RoomName;
 
 class RoomController extends Controller
 {
-    public function newRoom(){
+    public function newRoom($id){
+       // return $id;
         Permissions::checkActive();
         $checkNeed= Permissions::haveAllPermission();
 
@@ -21,9 +22,11 @@ class RoomController extends Controller
         $offices = Office::with(['officeLang' => function ($q) use ($lang) {
             $q->where('lang_id',$lang);
             // $q->addSelect('?')
-        }])->when(!$checkNeed,function ($q) use ($province){
-            $q->where('office_province',$province);
-        })->get();
+        }])->where('id',$id)->
+        // ->when(!$checkNeed,function ($q) use ($province){
+        //     $q->where('office_province',$province);
+        // })->
+        first();
         Permissions::havePermission("addRoom");
         return view('rooms.add',compact('offices'));
 
@@ -33,8 +36,12 @@ class RoomController extends Controller
     {
         Permissions::checkActive();
         Permissions::havePermission("addRoom");
+        if (empty($request['name'])) {
+            return back()->withStatus(__('Insert Room Name.'));
+
+        }
         $room = Room::create([
-            'office_id' => $request['office'],
+            'office_id' => $request['office_id'],
             'room_type' => $request['roomType'],
             'addedByUserId' => auth()->user()->id
             ]);
@@ -53,8 +60,11 @@ class RoomController extends Controller
         return back()->withStatus(__('Room successfully added.'));
 
     }
-    public function rooms(Request $request){
-        $id=$request['office'];
+    public function rooms(Request $request,$id=null){
+        if (empty($id)) {
+            $id=$request['office'];
+        }
+       
         Permissions::checkActive();
         Permissions::havePermission("editRooms");
 
@@ -68,8 +78,9 @@ class RoomController extends Controller
             // $q->addSelect('?')
         }])->where('active',1)->where( 'office_id',$id)->get();
        // return $rooms;
-        return view('rooms.index', compact('rooms'));
+        return view('rooms.index', compact('rooms','id'));
     }
+    
     public function getOffice()
         {
         $lang=1;
@@ -82,9 +93,22 @@ class RoomController extends Controller
             // $q->addSelect('?')
         }])->when(!$checkNeed,function ($q) use ($province){
             $q->where('office_province',$province);
-        })->get();
+        })->where('active',1)->get();
         Permissions::havePermission("addRoom");
+
         return view('rooms.edit',compact('offices'));
 
         }
+        
+        public function unactive($id)
+        {
+            $Room = Room::where('id', $id)
+            ->update(['active' => 0]);
+            $office=4;
+            return redirect()->route('room.index',[$office]);
+
+
+            return back()->withStatus(__('Room Successfully Unactive.'));
+        }
+     
 }

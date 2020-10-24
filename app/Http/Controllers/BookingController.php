@@ -25,9 +25,20 @@ class BookingController extends Controller
         }])->when(!$checkNeed,function ($q) use ($province){
             $q->where('office_province',$province);
         })
-        ->get();
+        ->where('active',1)->get();
         return view('booking.add',compact('offices','customer_id'));
     }  
+    public function booking()
+    {     
+           $reservations = Reservation::with(['customerRes' => function ($q)  {
+            // $q->addSelect('?')
+        }])->with(['roomRes' => function ($q)  {
+            // $q->addSelect('?')
+        }])->get();
+
+             //   return $reservations;
+        return view('booking.booking',compact('reservations'));
+    }
     
     public function getCustomer(){
         Permissions::checkActive();

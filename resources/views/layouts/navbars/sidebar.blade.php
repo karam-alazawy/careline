@@ -14,10 +14,10 @@ li.active-pro {
     Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
 -->
   <div class="logo">
-    <a href="http://www.creative-tim.com" class="simple-text logo-mini">
+    <a class="simple-text logo-mini">
       {{ __('UM') }}
     </a>
-    <a href="http://www.creative-tim.com" class="simple-text logo-normal">
+    <a  class="simple-text logo-normal">
       {{ __('Space') }}
     </a>
   </div>
@@ -39,7 +39,7 @@ li.active-pro {
             <b class="caret"></b>
           </p>
         </a>
-        <div class="collapse show" id="laravelExamples">
+        <div class="collapse hide" id="laravelExamples">
           <ul class="nav">
           <li class="@if ($activePage == 'newUser') active @endif">
               <a href="{{ route('user.add') }}">
@@ -81,7 +81,7 @@ li.active-pro {
             <b class="caret"></b>
           </p>
         </a>
-        <div class="collapse show" id="Customers">
+        <div class="collapse hide" id="Customers">
           <ul class="nav">
           <li class="@if ($activePage == 'newCustomer') active @endif">
               <a href="{{ route('customer.add') }}">
@@ -122,7 +122,7 @@ li.active-pro {
           </p>
         </a>
         
-        <div class="collapse show" id="Subscription">
+        <div class="collapse hide" id="Subscription">
           <ul class="nav">
           <li class="@if ($activePage == 'newSubscription') active @endif">
           <a href="{{ route('user.addSubscription') }}">
@@ -157,7 +157,7 @@ li.active-pro {
             <b class="caret"></b>
           </p>
         </a>
-        <div class="collapse show" id="Offices">
+        <div class="collapse hide" id="Offices">
           <ul class="nav">
           <li class="@if ($activePage == 'newOffice') active @endif">
               <a href="{{ route('office.add') }}">
@@ -195,14 +195,14 @@ li.active-pro {
           </p>
         </a>
         
-        <div class="collapse show" id="rooms">
+        <div class="collapse hide" id="rooms">
           <ul class="nav">
-          <li class="@if ($activePage == 'newRoom') active @endif">
+          <!-- <li class="@if ($activePage == 'newRoom') active @endif">
               <a href="{{ route('room.add') }}">
                 <i class="now-ui-icons objects_key-25"></i>
                 <p> {{ __("Add Room") }} </p>
               </a>
-          </li>  
+          </li>   -->
             <!-- 
                <li class="@if ($activePage == 'profile') active @endif">
               <a href="{{ route('profile.edit') }}">
@@ -232,7 +232,7 @@ li.active-pro {
           </p>
         </a>
         
-        <div class="collapse show" id="tables">
+        <div class="collapse hide" id="tables">
           <ul class="nav">
           <li class="@if ($activePage == 'newTable') active @endif">
               <a href="{{ route('table.add') }}">
@@ -267,7 +267,7 @@ li.active-pro {
           </p>
         </a>
         
-        <div class="collapse show" id="Booking">
+        <div class="collapse hide" id="Booking">
           <ul class="nav">
           <li class="@if ($activePage == 'newBooking') active @endif">
               <a href="{{ route('booking.getCustomer') }}">
@@ -282,12 +282,12 @@ li.active-pro {
                 <p> {{ __("User Profile") }} </p>
               </a>
             </li> -->
-            <!-- <li class="@if ($activePage == 'booking') active @endif">
+            <li class="@if ($activePage == 'booking') active @endif">
               <a href="{{ route('booking.index') }}">
                 <i class="now-ui-icons design_bullet-list-67"></i>
                 <p> {{ __("Booking Management") }} </p>
               </a>
-            </li> -->
+            </li>
           </ul>
         </div>
         </li>

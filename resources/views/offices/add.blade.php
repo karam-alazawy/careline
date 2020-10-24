@@ -105,7 +105,7 @@ function getProvince() {
       url: "/api/getProvince?id="+x,
       context: document.body
     }).done(function(e) {
-        $("#province").html("");
+        $("#province").html(' <option value="">Select Province</option>');
 
      // console.log(e[0]['id_province']);
       e.forEach(element => {

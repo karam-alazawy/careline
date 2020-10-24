@@ -16,7 +16,7 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-              <a class="btn btn-primary btn-round text-white pull-right" href="{{ route('room.add') }}">Add Rooms</a>
+              <a class="btn btn-primary btn-round text-white pull-right" href="{{route('room.addRoom',[$id])}}">Add Rooms</a>
             <h4 class="card-title">Rooms</h4>
             <div class="col-12 mt-2">
                                         </div>
@@ -62,11 +62,12 @@
                       </a>
                                                               </td>
 
-                      <td class="text-right">
-                      <a type="button" href="{{ route('user.edit',[1]) }}" rel="tooltip" class="btn btn-success btn-icon btn-sm " data-original-title="" title="">
-                        <i class="now-ui-icons ui-2_settings-90"></i>
-                      </a>
-                                                              </td>
+                 
+                                                              <td class="text-right">
+                        <a type="button" href="{{ route('room.unactive',[$data->id]) }}" rel="tooltip" class="btn btn-danger btn-icon btn-sm " data-original-title="" title="">
+                        <i class="now-ui-icons media-1_button-power"></i>
+                      </a>                   
+                                      </td>
                   </tr>@endforeach
 
                               </tbody>

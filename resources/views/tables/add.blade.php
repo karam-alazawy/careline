@@ -35,7 +35,7 @@
                     </div>
                 </div>
 
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col-md-7 pr-1">
                         <div class="form-group">
                             <label>{{__("Open At")}}</label>
@@ -59,7 +59,7 @@
                         </div>
                     </div>
                 </div>
-             
+              -->
                                  
                
 <input hidden type="text" name="room_id" value="{{$room_id}}">

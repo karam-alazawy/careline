@@ -1,7 +1,7 @@
 @extends('layouts.app', [
-  'class' => 'Customer',
-    'namePage' => 'Customers',
-    'activePage' => 'Customers',
+    'class' => 'sidebar-mini ',
+    'namePage' => 'Booking',
+    'activePage' => 'Booking',
     'activeNav' => '',
 ])
 
@@ -16,8 +16,8 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-              <a class="btn btn-primary btn-round text-white pull-right" href="{{ route('customer.add') }}">Add Customers</a>
-            <h4 class="card-title">Customers</h4>
+              <a class="btn btn-primary btn-round text-white pull-right" href="{{ route('booking.add') }}">Add Booking</a>
+            <h4 class="card-title">Booking</h4>
             <div class="col-12 mt-2">
                                         </div>
           </div>
@@ -27,52 +27,42 @@
             </div>
             <table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
               <thead>
-                <tr>
-                  <th>Profile</th>
+              <tr>
+                  <th>#</th>
                   <th>Name</th>
-                  <th>Email</th>
-                  <th>Subscription date</th>
+                  <th>Room</th>
+
                   <th>Creation date</th>
-                  <th class="disabled-sorting text-right">Subscription</th>
-                  <th class="disabled-sorting text-right">Unactivate</th>
+                  <th class="disabled-sorting text-right">Actions</th>
                 </tr>
               </thead>
               <tfoot>
                 <tr>
-                  <th>Profile</th>
+                  <th>#</th>
                   <th>Name</th>
-                  <th>Email</th>
-                  <th>Subscription date</th>
+                  <th>Room</th>
                   <th>Creation date</th>
-                  <th class="disabled-sorting text-right">Subscription</th>
-                  <th class="disabled-sorting text-right">Unactivate</th>
+                  <th class="disabled-sorting text-right">Actions</th>
                 </tr>
               </tfoot>
               <tbody>
-              @foreach($customers as $key => $data)
+              @foreach($reservations as $key => $data)
 
                                   <tr>
                     <td>
                       <span class="avatar avatar-sm rounded-circle">
-                        <img src="{{asset('assets')}}/img/default-avatar.png" alt="" style="max-width: 80px; border-radiu: 100px">
+                        <!-- <img src="{{asset('assets')}}/img/default-avatar.png" alt="" style="max-width: 80px; border-radiu: 100px"> -->
                       </span>
                     </td>
-                    <td>{{$data->name}}</td>
-                    <td>{{$data->email}}</td>
-                    <td>{{$data->subscription_date}}</td>
+                    <td>{{$data->customerRes->name}}</td>
+                    <td>{{$data->roomRes->room_name}}</td>
                     <td>{{$data->created_at}}</td>
-                
+              
                       <td class="text-right">
-                      <a type="button" href="customerSubscription?id={{$data->id}}" rel="tooltip" class="btn btn-success btn-icon btn-sm " data-original-title="" title="">
+                      <a type="button" href="{{ route('user.edit',[1]) }}" rel="tooltip" class="btn btn-success btn-icon btn-sm " data-original-title="" title="">
                         <i class="now-ui-icons ui-2_settings-90"></i>
                       </a>
-                    
                                                               </td>
-              
-                                             <td class="text-right">
-                                               <a type="button" href="{{ route('customer.unactive',[$data->id]) }}" rel="tooltip" class="btn btn-danger btn-icon btn-sm " data-original-title="" title="">
-                        <i class="now-ui-icons media-1_button-power"></i>
-                      </a>                   </td>
                   </tr>@endforeach
 
                               </tbody>
