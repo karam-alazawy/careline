@@ -23,7 +23,7 @@ class CustomerUiController extends Controller
 
             //return session('customer');
         }
-        return view('customerUi.login');;
+        return view('customerui.login');;
 
         //else
        // return back()->withStatus(__('This email address is not available. choose a different address'));

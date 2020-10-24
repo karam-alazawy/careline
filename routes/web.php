@@ -37,9 +37,9 @@ Route::get('/customerLogin',function ()
 		->get();
 		$country="s";
 
-		return view('customerUi.home',compact('offices',"country",'customer'));
+		return view('customerui.home',compact('offices',"country",'customer'));
 	}else
-	return view('customerUi.login');;
+	return view('customerui.login');;
 
 });
 Route::get('/customerLogout',function ()
