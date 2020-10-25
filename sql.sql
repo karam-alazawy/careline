@@ -1,6 +1,6 @@
 ALTER TABLE `users` ADD COLUMN `permissions` TEXT NULL DEFAULT NULL;
 ALTER TABLE `users` ADD COLUMN `active` tinyint(1) NOT NULL DEFAULT '0';
--- ALTER TABLE `users` ADD COLUMN `office_id` int(11) NOT NULL;
+ALTER TABLE `users` ADD COLUMN `office_id` int(11) NOT NULL;
 ALTER TABLE `users` ADD COLUMN `country` int(11) NOT NULL;
 ALTER TABLE `users` ADD COLUMN `province` int(11) NOT NULL;
 
@@ -238,3 +238,7 @@ CREATE TABLE `reservations` (
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 
 
+
+----------2020/10/25
+
+ ALTER TABLE users DROP office_id;
