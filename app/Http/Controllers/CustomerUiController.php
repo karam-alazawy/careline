@@ -14,7 +14,9 @@ class CustomerUiController extends Controller
     public function login(Request $request){
         //  return  Carbon::now()->addMonths(1);
          
-        $customer = Customer::where('email',$request->email)->where('password',md5($request['password']))->where('active',1)->where('subscription_date','>=',Carbon::now())->first();
+        $customer = Customer::where('email',$request->email)->where('password',md5($request['password']))->where('active',1)->
+        // where('subscription_date','>=',Carbon::now())->
+        first();
 
         if ($customer) {
            
@@ -32,10 +34,26 @@ class CustomerUiController extends Controller
   
       }
 
+      public function reservations()
+      {
+          
+        $reservations = Reservation::where("customer_id",session('customer')->id)
 
+        ->with(['customerRes' => function ($q)  {
+            // $q->addSelect('?')
+        }])->with(['roomRes' => function ($q)  {
+            // $q->addSelect('?')
+        }])->get();
+        //return $reservations;
+        return view('customerui.reservations',compact('reservations'));
+      }
       public function addNewBooking(Request $request)
       {
-  
+        $sub_date =  $customer = Customer::where('id',session('customer')->id)->where('subscription_date','>=',Carbon::now())->
+        first();
+        if (!$sub_date) {
+            return back()->withStatus(__('Your Subscription End'));
+        }
           if (empty($request['table_id'])) {
               return back()->withStatus(__('Select Table'));
           }

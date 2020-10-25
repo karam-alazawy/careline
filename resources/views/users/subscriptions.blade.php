@@ -29,18 +29,20 @@
               <thead>
                 <tr>
                   <th>Name</th>
-                  <th>Type</th>
+                  <th>Price</th>
                   <th>Period</th>
                   <th>Creation date</th>
-                  <!-- <th class="disabled-sorting text-right">Actions</th> -->
+                  <th class="disabled-sorting text-right">Actions</th>
                 </tr>
               </thead>
               <tfoot>
                 <tr>
                   <th>Name</th>
-                  <th>Type</th>
+                  <th>Price</th>
                   <th>Period</th>
                   <th>Creation date</th>
+                  <th class="disabled-sorting text-right">Actions</th>
+
                 </tr>
               </tfoot>
               <tbody>
@@ -49,9 +51,14 @@
                                   <tr>
                 
                     <td>{{$data->subscriptionLang->subscription_name}}</td>
-                    <td>{{$data->type}}</td>
-                    <td>{{$data->period}}</td>
+                    <td>{{(int)$data->price}}</td>
+                    <td>{{$data->period}} ( {{$data->type}} )</td>
                     <td>{{$data->created_at}}</td>
+                    <td class="text-right">
+                        <a type="button" href="{{ route('subscription.unactive',[$data->id]) }}" rel="tooltip" class="btn btn-danger btn-icon btn-sm " data-original-title="" title="">
+                        <i class="now-ui-icons media-1_button-power"></i>
+                      </a>                   
+                                      </td>
 <!--                    
                       <td class="text-right">
                       <a type="button" href="userSubscription?id={{$data->id}}" rel="tooltip" class="btn btn-success btn-icon btn-sm " data-original-title="" title="">

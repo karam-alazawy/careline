@@ -33,7 +33,8 @@
                   <th>Room</th>
 
                   <th>Creation date</th>
-                  <th class="disabled-sorting text-right">Actions</th>
+                  <th>Status</th>
+
                 </tr>
               </thead>
               <tfoot>
@@ -42,7 +43,7 @@
                   <th>Name</th>
                   <th>Room</th>
                   <th>Creation date</th>
-                  <th class="disabled-sorting text-right">Actions</th>
+                  <th>Status</th>
                 </tr>
               </tfoot>
               <tbody>
@@ -57,12 +58,33 @@
                     <td>{{$data->customerRes->name}}</td>
                     <td>{{$data->roomRes->room_name}}</td>
                     <td>{{$data->created_at}}</td>
-              
-                      <td class="text-right">
-                      <a type="button" href="{{ route('user.edit',[1]) }}" rel="tooltip" class="btn btn-success btn-icon btn-sm " data-original-title="" title="">
-                        <i class="now-ui-icons ui-2_settings-90"></i>
-                      </a>
-                                                              </td>
+                  
+
+                    <?php switch ($data->status) {
+                        case 'pending':
+                            echo '<td  class="">
+                            <a type="button" href="'. route("booking.approve",[$data->id]) .'" rel="tooltip" class="btn btn-success btn-icon btn-sm " data-original-title="" title="">
+                              <i class="now-ui-icons ui-2_settings-90"></i>
+                            </a>
+                            <a type="button"  href="'. route("booking.cancel",[$data->id]) .'" rel="tooltip" class="btn btn-danger btn-icon btn-sm " data-original-title="" title="">
+                            <i class="now-ui-icons media-1_button-power"></i>
+                            </td>';
+                             break;
+                        
+                             case 'cancel':
+                                echo ' <td  style="color:red">Canceld</td>';
+                                 break;
+                             
+                                 case 'approve':
+                                    echo ' <td style="color:green">Approved</td>';
+                                     break;
+                                 
+                        default:
+                            # code...
+                            break;
+                    } ?>
+                   
+                  
                   </tr>@endforeach
 
                               </tbody>

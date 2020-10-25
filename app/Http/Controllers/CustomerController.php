@@ -37,6 +37,12 @@ class CustomerController extends Controller
           ->update(['active' => 0]);
           return back()->withStatus(__('Customer Successfully Unactive.'));
       }
+      public function subscriptionUnactive($id)
+      {
+          $Subscription = Subscription::where('id', $id)
+          ->update(['active' => 0]);
+          return back()->withStatus(__('Subscription Successfully Unactive.'));
+      }
 
       public function customerSubscription(Request $request){
         $id=$request['id'];
@@ -46,7 +52,7 @@ class CustomerController extends Controller
         $subscriptions = Subscription::with(['subscriptionLang' => function ($q) use ($lang) {
             $q->where('lang_id',$lang);
             // $q->addSelect('?')
-        }])->get();
+        }])->where('active',1)->get();
 
         return view('customers.subscription',compact('subscriptions','id'));
     }
@@ -174,9 +180,9 @@ class CustomerController extends Controller
            $subscriptions = Subscription::with(['subscriptionLang' => function ($q) use ($lang) {
               $q->where('lang_id',$lang);
               // $q->addSelect('?')
-           }])->get();
+           }])->where('active',1)->get();
             return view('users.subscriptions',compact('subscriptions'));
    
       }
-
+      
 }

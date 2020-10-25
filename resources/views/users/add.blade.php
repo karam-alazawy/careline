@@ -52,21 +52,7 @@
                 </div>                
                 <div class="row">
                 <div class="col-md-7 pr-1">
-                <div class="form-group">
-                    <label for="exampleInputEmail1">{{__(" Office")}}</label>
-                     <div class="row">
-                      <div class="col-xs-5 officeSelect">
-                        <select name="office" id="officeSelect" class="form-control">
-                        @foreach($offices as $key => $data)
-                          <option value="{{$data->id}}">{{$data->officeLang->office_name}}</option>
-                          @endforeach
-                        </select>
-                      </div>
-                      
-                      
-                    </div>
-                    </div>
-
+         
                     <div class="form-group">
                     <label for="exampleInputEmail1">{{__(" Country and Province")}}</label>
                      <div class="row">
@@ -161,7 +147,7 @@ function getProvince() {
       url: "/api/getProvince?id="+x,
       context: document.body
     }).done(function(e) {
-      $("#province").html("");
+      $("#province").html('<option value="">Select Province</option>');
 
      // console.log(e[0]['id_province']);
       e.forEach(element => {

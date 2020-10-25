@@ -130,7 +130,13 @@ li.active-pro {
     <div class="collapse navbar-collapse justify-content-end" id="navigation">
       <ul class="navbar-nav">
 
-      <li class="nav-item @if ($activePage == 'login') active @endif  @if ($activePage != 'customerBooking') hide @endif ">
+      <li class="nav-item @if ($activePage == 'reservations') active @endif  @if ($activePage != 'customerBooking') hide @endif ">
+          <a href="/customerReservations" class="nav-link">
+            <i class="now-ui-icons users_circle-08"></i> {{ __("My Reservations") }}
+          </a>
+        </li> 
+          
+          <li class="nav-item @if ($activePage == 'login') active @endif  @if ($activePage != 'customerBooking') hide @endif ">
           <a href="/customerLogout" class="nav-link">
             <i class="now-ui-icons users_circle-08"></i> {{ __("LogOut") }}
           </a>

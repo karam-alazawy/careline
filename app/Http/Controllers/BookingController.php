@@ -8,7 +8,8 @@ use App\Models\Country;
 use App\Models\Customer;
 use App\Models\Office;
 use App\Models\Reservation;
-    
+use Carbon\Carbon;
+
 class BookingController extends Controller
 {
     public function newBooking(Request $request){
@@ -28,13 +29,28 @@ class BookingController extends Controller
         ->where('active',1)->get();
         return view('booking.add',compact('offices','customer_id'));
     }  
+    public function approve($id)
+    {
+        $Reservation = Reservation::where('id', $id)
+        ->update(['status' => 'approve']);
+        return back()->withStatus(__('Reservation Successfully Approved.'));
+    }
+    public function cancel($id)
+    {
+        $Reservation = Reservation::where('id', $id)
+        ->update(['status' => 'cancel']);
+        return back()->withStatus(__('Reservation Successfully Canceld.'));
+    }
+ 
+ 
     public function booking()
     {     
            $reservations = Reservation::with(['customerRes' => function ($q)  {
             // $q->addSelect('?')
         }])->with(['roomRes' => function ($q)  {
             // $q->addSelect('?')
-        }])->get();
+        }])->orderBy('created_at', 'desc')
+        ->get();
 
              //   return $reservations;
         return view('booking.booking',compact('reservations'));
@@ -45,7 +61,7 @@ class BookingController extends Controller
         Permissions::havePermission("addBooking");
         $lang=1;
 
-        $customer = Customer::get();
+        $customer = Customer::where('subscription_date','>=',Carbon::now())->get();
         return view('booking.getCustomer',compact('customer'));
     }
 

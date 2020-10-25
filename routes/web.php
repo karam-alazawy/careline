@@ -52,6 +52,7 @@ Route::get('/customerLogout',function ()
 
 Route::post('customerLogin/', ['as' => 'customer.login', 'uses' => 'CustomerUiController@login']);
 Route::get('customer/', ['as' => 'customer.booking', 'uses' => 'CustomerUiController@addNewBooking']);
+Route::get('customerReservations/', ['as' => 'customer.reservations', 'uses' => 'CustomerUiController@reservations']);
 
 Route::group(['middleware' => 'auth'], function () {
 	//users
@@ -74,6 +75,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('addSubscription/', ['as' => 'user.addSubscription', 'uses' => 'CustomerController@addSubscription']);
 	Route::post('addNewSubscription/', ['as' => 'user.addNewSubscription', 'uses' => 'CustomerController@addNewSubscription']);
 	Route::get('/customerUnactive/{id}',  ['as' => 'customer.unactive', 'uses' => 'CustomerController@unactive']);
+	Route::get('/subscriptionUnactive/{id}',  ['as' => 'subscription.unactive', 'uses' => 'CustomerController@subscriptionUnactive']);
 
 	//office
 	Route::get('/newOffice',  'OfficeController@newOffice');
@@ -105,6 +107,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('newBooking/', ['as' => 'booking.add', 'uses' => 'BookingController@addNewBooking']);
 	Route::get('getCustomer/', ['as' => 'booking.getCustomer', 'uses' => 'BookingController@getCustomer']);
 	Route::get('newBooking/', ['as' => 'booking.add', 'uses' => 'BookingController@newBooking']);
+	Route::get('/bookingApprove/{id}',  ['as' => 'booking.approve', 'uses' => 'BookingController@approve']);
+	Route::get('/bookingCancel/{id}',  ['as' => 'booking.cancel', 'uses' => 'BookingController@cancel']);
 
 	
 //	Route::resource('user', 'UserController', ['except' => ['show']]);

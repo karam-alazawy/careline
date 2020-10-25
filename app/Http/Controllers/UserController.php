@@ -98,10 +98,10 @@ public function unactive($id)
             $users = Users::create([
                 'name' => $request['name'],
                 'email' => $request['email'],
-                'office' => $request['office'],
+                'country' => $request['country'],
+                'province' => $request['province'],
                 'password' => Hash::make($request['password']),
                 'permissions' => $permissions,
-                'office_id' => $request['office'],
                 'addedByUserId' => auth()->user()->id
                 ]);
                 // if (!$users) {
@@ -109,7 +109,8 @@ public function unactive($id)
                 // }
                 return back()->withStatus(__('User successfully added.'));
           } catch(\Illuminate\Database\QueryException $ex){ 
-            return back()->withStatus(__('This email address is not available. choose a different address'));
+            return $ex;
+            return back()->withStatus(__('Check Informations'));
             // Note any method of class PDOException can be called on $ex.
           }
     

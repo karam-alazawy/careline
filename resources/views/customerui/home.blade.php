@@ -2,7 +2,7 @@
     'namePage' => '',
     'class' => 'sidebar-mini ',
     'activePage' => 'customerBooking',
-    'backgroundImage' => asset('assets') . "/img/bg14.jpg",
+    'backgroundImage' => asset('assets') . "/img/bg14.png",
 ])
 
 @section('pikkerStyleLink')

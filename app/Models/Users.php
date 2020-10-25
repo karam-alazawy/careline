@@ -10,10 +10,11 @@ class Users extends Model
         'name',
         'email',
         'password',
+        'country',
+        'province',
         'updated_at',
         'created_at',
         'permissions',
-        'office_id',
        ];
 
        
