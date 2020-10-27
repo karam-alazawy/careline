@@ -85,9 +85,10 @@
                         <select name="permissions[]" id="multiselect" class="form-control" size="8" multiple="multiple">
                           <option value="addUser">Add User</option>
                           <option value="addCustomer">Add Customer</option>
-                          <option value="addRoom">Add Room</option>
-                          <option value="addTable">Add Table</option>
+                          <option value="addOffice">Add Office</option>
+                          <option value="addTable,addRoom,editRooms,editOffice">Office Manager</option>
                           <option value="addReservation">Booking</option>
+                          <option value="addSubscription,editSubscriptions">Subscription Manager</option>
                         </select>
                       </div>
                       

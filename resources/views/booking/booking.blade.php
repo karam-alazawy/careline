@@ -29,9 +29,12 @@
               <thead>
               <tr>
                   <th>#</th>
-                  <th>Name</th>
-                  <th>Room</th>
+                  <th>Name</th> 
+                  <th>Office</th>
 
+                  <th>Room</th>
+                  <th>From</th>
+                  <th>To</th>
                   <th>Creation date</th>
                   <th>Status</th>
 
@@ -41,7 +44,10 @@
                 <tr>
                   <th>#</th>
                   <th>Name</th>
+                  <th>Office</th>
                   <th>Room</th>
+                  <th>From</th>
+                  <th>To</th>
                   <th>Creation date</th>
                   <th>Status</th>
                 </tr>
@@ -56,7 +62,11 @@
                       </span>
                     </td>
                     <td>{{$data->customerRes->name}}</td>
+                    <td>{{$data->roomRes2->officeFromRoom->office_name}}</td>
+
                     <td>{{$data->roomRes->room_name}}</td>
+                    <td>{{$data->date_in}}</td>
+                    <td>{{$data->date_out}}</td>
                     <td>{{$data->created_at}}</td>
                   
 

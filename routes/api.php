@@ -50,7 +50,7 @@ Route::get('/getTables', function (Request $request) {
 Route::get('/getReservations', function (Request $request) {
    
 $reservations = Reservation::where("table_id",$request['id'])
-// ->where('status','approve')
+ ->where('status','approve')
 ->get();
     return $reservations;
 });

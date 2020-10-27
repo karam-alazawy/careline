@@ -19,7 +19,10 @@ class Room extends Model
        {
            return $this->hasOne(RoomName::class,'room_id','id');
        }
-
+       public function officeFromRoom()
+       {
+           return $this->hasOne('App\Models\OfficeName','office_id','office_id');
+       }
     // public function officeCountry()
     // {
     //     return $this->hasOne(Country::class,'id','office_country');

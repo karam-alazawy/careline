@@ -14,7 +14,7 @@ class BookingController extends Controller
 {
     public function newBooking(Request $request){
         Permissions::checkActive();
-        Permissions::havePermission("addBooking");
+        Permissions::havePermission("addReservation");
         $lang=1;
         $checkNeed= Permissions::haveAllPermission();
 
@@ -31,12 +31,16 @@ class BookingController extends Controller
     }  
     public function approve($id)
     {
+        Permissions::havePermission("addReservation");
+
         $Reservation = Reservation::where('id', $id)
         ->update(['status' => 'approve']);
         return back()->withStatus(__('Reservation Successfully Approved.'));
     }
     public function cancel($id)
     {
+        Permissions::havePermission("addReservation");
+
         $Reservation = Reservation::where('id', $id)
         ->update(['status' => 'cancel']);
         return back()->withStatus(__('Reservation Successfully Canceld.'));
@@ -45,20 +49,27 @@ class BookingController extends Controller
  
     public function booking()
     {     
+        Permissions::havePermission("addReservation");
+
            $reservations = Reservation::with(['customerRes' => function ($q)  {
             // $q->addSelect('?')
-        }])->with(['roomRes' => function ($q)  {
-            // $q->addSelect('?')
+        }])->with(['roomRes2' => function ($q)  {
+            $q->with(['roomLang' => function ($q)  {
+               
+            }]);
+            $q->with(['officeFromRoom' => function ($q)  {
+               
+            }]);
         }])->orderBy('created_at', 'desc')
         ->get();
 
-             //   return $reservations;
+         //return $reservations;
         return view('booking.booking',compact('reservations'));
     }
     
     public function getCustomer(){
         Permissions::checkActive();
-        Permissions::havePermission("addBooking");
+        Permissions::havePermission("addReservation");
         $lang=1;
 
         $customer = Customer::where('subscription_date','>=',Carbon::now())->get();

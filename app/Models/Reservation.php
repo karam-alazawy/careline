@@ -25,6 +25,10 @@ class Reservation extends Model
        {
            return $this->hasOne('App\Models\RoomName','room_id','room_id');
        }
+       public function roomRes2()
+       {
+           return $this->hasOne('App\Models\Room','id','room_id');
+       }
        public function tableRes()
        {
            return $this->hasOne('App\Models\Table','id','table_id');

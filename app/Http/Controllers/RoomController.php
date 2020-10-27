@@ -14,6 +14,8 @@ class RoomController extends Controller
     public function newRoom($id){
        // return $id;
         Permissions::checkActive();
+        Permissions::havePermission("addRoom");
+
         $checkNeed= Permissions::haveAllPermission();
 
         $province=auth()->user()->province;
@@ -27,7 +29,6 @@ class RoomController extends Controller
         //     $q->where('office_province',$province);
         // })->
         first();
-        Permissions::havePermission("addRoom");
         return view('rooms.add',compact('offices'));
 
     }
