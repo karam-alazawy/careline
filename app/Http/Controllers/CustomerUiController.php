@@ -47,6 +47,7 @@ class CustomerUiController extends Controller
         //return $reservations;
         return view('customerui.reservations',compact('reservations'));
       }
+
       public function addNewBooking(Request $request)
       {
         $sub_date =  $customer = Customer::where('id',session('customer')->id)->where('subscription_date','>=',Carbon::now())->
@@ -71,7 +72,9 @@ class CustomerUiController extends Controller
           if ($reservation_date) {
               return back()->withStatus(__('This Date Already Reservation'));
           }
-          
+            if ($request->date_in>=$request->date_out) {
+              return back()->withStatus(__('Please Choose Correct Date'));
+          }
           $Reservation = Reservation::create([
               'customer_id' => $request['customer_id'],
               'room_id' => $request['room_id'],
