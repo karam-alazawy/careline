@@ -14,7 +14,6 @@ class OfficeController extends Controller
     
     public function offices()
     {
-
         Permissions::checkActive();
 
        // $offices = Office::where('active',1)->get();
@@ -28,7 +27,7 @@ class OfficeController extends Controller
             // $q->addSelect('?')
         }])->with(['provinceLang' => function ($q) use ($lang) {
             // $q->addSelect('?')
-        }])->where('active',1)->get();
+        }])->where('active',1)->where('office_province',auth()->user()->province)->get();
         //return $offices;
         //return $offices;
         return view('offices.index', compact('offices'));
@@ -49,7 +48,7 @@ class OfficeController extends Controller
             // $q->addSelect('?')
         }])->with(['provinceLang' => function ($q) use ($lang) {
             // $q->addSelect('?')
-        }])->where('active',0)->get();
+        }])->where('active',0)->where('office_province',auth()->user()->province)->get();
         //return $offices;
         //return $offices;
         return view('offices.unactive', compact('offices'));
