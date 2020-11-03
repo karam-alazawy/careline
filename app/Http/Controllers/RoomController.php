@@ -46,6 +46,10 @@ class RoomController extends Controller
             'room_type' => $request['roomType'],
             'addedByUserId' => auth()->user()->id
             ]);
+            // $langs = Lang::where('active',1)->get();
+            // foreach ($langs as $key => $value) {
+            //     # code...
+            // }
             if ($room) {
                 $id=$room->id;
                 for ($i=1; $i <4 ; $i++) { 

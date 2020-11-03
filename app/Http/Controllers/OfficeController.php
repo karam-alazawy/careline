@@ -33,6 +33,27 @@ class OfficeController extends Controller
         //return $offices;
         return view('offices.index', compact('offices'));
     }
+    public function unactivate()
+    {
+
+        Permissions::checkActive();
+
+       // $offices = Office::where('active',1)->get();
+        $lang=1;
+        // $offices = Office::join('office_bnames', 'offices.id', '=', 'office_names.office_id')->select("office_name","offices.id")->where('active',1)->get();
+        $offices = Office::with(['officeLang' => function ($q) use ($lang) {
+            $q->where('lang_id',$lang);
+            
+            // $q->addSelect('?')
+        }])->with(['countryLang' => function ($q) use ($lang) {
+            // $q->addSelect('?')
+        }])->with(['provinceLang' => function ($q) use ($lang) {
+            // $q->addSelect('?')
+        }])->where('active',0)->get();
+        //return $offices;
+        //return $offices;
+        return view('offices.unactive', compact('offices'));
+    }
     public function editOffice($id){
       //  Permissions::havePermission("editUsers");
       Permissions::havePermission("editOffice");
@@ -84,6 +105,7 @@ class OfficeController extends Controller
         $office = Office::create([
             'office_country' => $request['country'],
             'office_province' => $request['province'],
+            'active' => 1,
             'addedByUserId' => auth()->user()->id
             ]);
             if ($office) {
@@ -105,9 +127,9 @@ class OfficeController extends Controller
     public function unactive($id)
     {
         Permissions::havePermission("editOffice");
-
-        $Office = Office::where('id', $id)
-        ->update(['active' => 0]);
+        $office = Office::find($id);
+        $office = Office::where('id', $id)
+        ->update(['active' => !$office->active]);
         return back()->withStatus(__('Office Successfully Unactive.'));
     }
  

@@ -84,6 +84,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/edit/{id}', ['as' => 'office.edit', 'uses' => 'OfficeController@editOffice']);
 	Route::get('/unactive/{id}',  ['as' => 'office.unactive', 'uses' => 'OfficeController@unactive']);
 	Route::put('editOffice/{id}', ['as' => 'office.editTheOffice', 'uses' => 'OfficeController@editTheOffice']);
+	Route::get('unactivateOffices', ['as' => 'office.unactivate', 'uses' => 'OfficeController@unactivate']);
 
 
 	//rooms

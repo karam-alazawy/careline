@@ -179,6 +179,13 @@ li.active-pro {
                 <p> {{ __("Offices Management") }} </p>
               </a>
             </li>
+
+            <li class="@if ($activePage == 'unactivateOffices') active @endif">
+              <a href="{{ route('office.unactivate') }}">
+                <i class="now-ui-icons design_bullet-list-67"></i>
+                <p> {{ __("Unactive Offices") }} </p>
+              </a>
+            </li>
           </ul>
         </div>
       
