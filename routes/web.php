@@ -53,6 +53,7 @@ Route::get('/customerLogout',function ()
 Route::post('customerLogin/', ['as' => 'customer.login', 'uses' => 'CustomerUiController@login']);
 Route::get('customer/', ['as' => 'customer.booking', 'uses' => 'CustomerUiController@addNewBooking']);
 Route::get('customerReservations/', ['as' => 'customer.reservations', 'uses' => 'CustomerUiController@reservations']);
+Route::get('customerSaveProvince/', ['as' => 'customer.saveProvince', 'uses' => 'CustomerUiController@saveProvince']);
 
 Route::group(['middleware' => 'auth'], function () {
 	//users
