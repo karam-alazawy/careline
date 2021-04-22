@@ -33,6 +33,8 @@ class CustomerUiController extends Controller
         $unimartNetworkGetter = new UnimartNetworkGetter();
 
         $token= $unimartNetworkGetter->getTokenFromEmail($request->email,$request->password);
+        Log::info('tokentoken  . : ' . print_r($token,true));
+
         $user= $unimartNetworkGetter->getClientInfo($request->email,$token)['data'];
         Log::info('useruseruser  . : ' . print_r($user,true));
 
