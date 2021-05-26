@@ -32,11 +32,11 @@ li.active-pro {
             <i class="now-ui-icons tech_mobile"></i> {{ __("Register") }}
           </a>
         </li> -->
-        <li class="nav-item @if ($activePage == 'login') active @endif ">
+        <!-- <li class="nav-item @if ($activePage == 'login') active @endif ">
           <a href="{{ route('login') }}" class="nav-link">
             <i class="now-ui-icons users_circle-08"></i> {{ __("Login") }}
           </a>
-        </li>
+        </li> -->
         <li class="nav-item @if ($activePage == 'customerLogin') active @endif ">
           <a href="/customerLogin" class="nav-link">
             <i class="now-ui-icons users_circle-08"></i> {{ __("Customer") }}

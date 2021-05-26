@@ -55,6 +55,7 @@ Route::get('/customerLogout',function ()
 	return view('customerui.login');;
 
 });
+Route::post('admin/login', 'Auth\LoginController@login')->name('loginToAdmin');;
 
 Route::post('customerLogin/', ['as' => 'login', 'uses' => 'CustomerUiController@login']);
 Route::get('customer/', ['as' => 'customer.booking', 'uses' => 'CustomerUiController@addNewBooking']);
