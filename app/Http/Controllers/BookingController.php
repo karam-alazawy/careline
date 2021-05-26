@@ -60,10 +60,15 @@ class BookingController extends Controller
             $q->with(['officeFromRoom' => function ($q)  {
                
             }]);
+        }])->with(['tableRes' => function ($q)  {
+            $q->with(['tableLang' => function ($q)  {
+               
+            }]);
+         
         }])->orderBy('created_at', 'desc')
         ->get();
 
-         //return $reservations;
+        //  return $reservations;
         return view('booking.booking',compact('reservations'));
     }
     
