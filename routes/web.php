@@ -42,6 +42,12 @@ Route::get('/customerLogin',function ()
 	return view('customerui.login');;
 
 });
+
+Route::get('/loginAdmin',function ()
+{
+	return view('auth.login');;
+
+});
 Route::get('/customerLogout',function ()
 {
 	Session::forget('customer');
@@ -50,7 +56,7 @@ Route::get('/customerLogout',function ()
 
 });
 
-Route::post('customerLogin/', ['as' => 'customer.login', 'uses' => 'CustomerUiController@login']);
+Route::post('customerLogin/', ['as' => 'login', 'uses' => 'CustomerUiController@login']);
 Route::get('customer/', ['as' => 'customer.booking', 'uses' => 'CustomerUiController@addNewBooking']);
 Route::get('customerReservations/', ['as' => 'customer.reservations', 'uses' => 'CustomerUiController@reservations']);
 Route::get('customerSaveProvince/', ['as' => 'customer.saveProvince', 'uses' => 'CustomerUiController@saveProvince']);

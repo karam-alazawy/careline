@@ -26,7 +26,7 @@
             </div>
         </div>
         <div class="col-md-4 ml-auto mr-auto">
-            <form role="form" method="POST" action="{{ route('customer.login') }}">
+            <form role="form" method="POST" action="{{ route('login') }}">
                 @csrf
                 <!-- @method('post') -->
             <div class="card card-login card-plain">
