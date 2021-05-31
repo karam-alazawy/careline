@@ -69,17 +69,6 @@ class CustomerUiController extends Controller
         // first();
         }
         $id=$newcustomer->id;
-
-
-        $subscription_date=Carbon::now();
-        $date=Carbon::parse($subscription_date)->addMonths(3);
-
-  $renewalSubscription = Customer::where('id',  $id)
-  ->update(['subscription_date' => $date]);
-
-
-
-
         if ($newcustomer) {
             session(['customer' => $newcustomer]);
             if ($newcustomer->province==0) {
