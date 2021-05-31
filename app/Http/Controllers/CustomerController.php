@@ -85,6 +85,13 @@ class CustomerController extends Controller
                   // if (!$users) {
                   //     return back()->withStatus(__("error"));
                   // }
+
+                  $subscription_date=Carbon::now();
+                  $date=Carbon::parse($subscription_date)->addMonths(3);
+
+            $renewalSubscription = Customer::where('id',  $customer->id)
+            ->update(['subscription_date' => $date]);
+
                   return back()->withStatus(__('User successfully added.'));
             } catch(\Illuminate\Database\QueryException $ex){ 
               return back()->withStatus(__('This email address is not available. choose a different address'));
