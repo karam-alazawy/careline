@@ -150,7 +150,7 @@ select:-internal-list-box option:checked {
                     </div>
                 </div>
 
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col-md-7 pr-1">
                         <div class="form-group">
                             <label>{{__("CheckOut")}}</label>
@@ -160,7 +160,7 @@ select:-internal-list-box option:checked {
                                 @include('alerts.feedback', ['field' => 'name'])
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <input   type="text" name="customer_id" hidden value="{{$customer->id}}">
                
 

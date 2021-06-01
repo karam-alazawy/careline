@@ -120,6 +120,8 @@ class CustomerUiController extends Controller
       {
         $sub_date =  $customer = Customer::where('id',session('customer')->id)->where('subscription_date','>=',Carbon::now())->
         first();
+        $date_out=Carbon::parse($request->date_in)->addHours(1);
+
         if (!$sub_date) {
             return back()->withStatus(__('Your Subscription End'));
         }
@@ -128,8 +130,8 @@ class CustomerUiController extends Controller
           }
           $reservation_date = Reservation::select("table_id")->where("table_id",$request['table_id'])
           ->where(function($query) use ($request){
-              $query->whereBetween('date_in', [$request->date_in,$request->date_out])
-                    ->orWhereBetween('date_out', [$request->date_in,$request->date_out]) ;
+              $query->whereBetween('date_in', [$request->date_in,$date_out])
+                    ->orWhereBetween('date_out', [$request->date_in,$date_out]) ;
             })->where('status','approve')
           // ->whereBetween('date_in',[$request->date_in,$request->date_out])
           // ->orWhereBetween('date_out',[$request->date_in,$request->date_out])
@@ -140,7 +142,7 @@ class CustomerUiController extends Controller
           if ($reservation_date) {
               return back()->withStatus(__('This Date Already Reservation'));
           }
-            if ($request->date_in>=$request->date_out) {
+            if ($request->date_in>=$date_out) {
               return back()->withStatus(__('Please Choose Correct Date'));
           }
           $Reservation = Reservation::create([
@@ -148,7 +150,7 @@ class CustomerUiController extends Controller
               'room_id' => $request['room_id'],
               'table_id' => $request['table_id'],
               'date_in' => $request['date_in'],
-              'date_out' => $request['date_out'],
+              'date_out' => $date_out,
               'addedByUserId' => -1
               ]);
   
