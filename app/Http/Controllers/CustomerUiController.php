@@ -129,7 +129,7 @@ class CustomerUiController extends Controller
               return back()->withStatus(__('Select Table'));
           }
           $reservation_date = Reservation::select("table_id")->where("table_id",$request['table_id'])
-          ->where(function($query) use ($request){
+          ->where(function($query) use ($request,$date_out){
               $query->whereBetween('date_in', [$request->date_in,$date_out])
                     ->orWhereBetween('date_out', [$request->date_in,$date_out]) ;
             })->where('status','approve')
