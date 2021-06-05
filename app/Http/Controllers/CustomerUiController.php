@@ -61,7 +61,7 @@ class CustomerUiController extends Controller
             'email' => $user['email'],
             'country' => $country->id_country,
             'province' => 0,
-            'phone' => $user['phone'],
+            'phone' => $user['phone']?"0000":$user['phone'],
             'password' => md5("password space"),
             'addedByUserId' => '0'
             ]);
