@@ -27,6 +27,9 @@ class CustomerUiController extends Controller
         return redirect()->to('/customerLogin');  
 
     }
+
+
+
     public function login(Request $request){
 
         //  return  Carbon::now()->addMonths(1);
@@ -61,7 +64,7 @@ class CustomerUiController extends Controller
             'email' => $user['email'],
             'country' => $country->id_country,
             'province' => 0,
-            'phone' => $user['phone']?"0000":$user['phone'],
+            'phone' => empty($user['phone'])? "0000":$user['phone'],
             'password' => md5("password space"),
             'addedByUserId' => '0'
             ]);
