@@ -1,4 +1,11 @@
+var a;
+var e;
+var myChart;
+var myChart2;
+var myChartData;
+var myChartData2;
 demo = {
+
     initPickColor: function() {
         $('.pick-class-label').click(function() {
             var new_class = $(this).attr('new-class');
@@ -98,7 +105,7 @@ demo = {
         gradientFill.addColorStop(0, "rgba(128, 182, 244, 0)");
         gradientFill.addColorStop(1, "rgba(249, 99, 59, 0.40)");
 
-        myChart = new Chart(ctx, {
+        this.myChart = new Chart(ctx, {
             type: 'line',
             responsive: true,
             data: {
@@ -120,6 +127,9 @@ demo = {
             },
             options: gradientChartOptionsConfiguration
         });
+
+
+
     },
 
     initDashboardPageCharts: function() {
@@ -237,7 +247,7 @@ demo = {
         gradientFill.addColorStop(0, "rgba(128, 182, 244, 0)");
         gradientFill.addColorStop(1, "rgba(255, 255, 255, 0.24)");
 
-        var myChart = new Chart(ctx, {
+        this.myChart = new Chart(ctx, {
             type: 'line',
             data: {
                 labels: ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"],
@@ -330,7 +340,7 @@ demo = {
         gradientFill.addColorStop(0, "rgba(128, 182, 244, 0)");
         gradientFill.addColorStop(1, "rgba(249, 99, 59, 0.40)");
 
-        myChart = new Chart(ctx, {
+        this.myChart = new Chart(ctx, {
             type: 'line',
             responsive: true,
             data: {
@@ -354,6 +364,9 @@ demo = {
         });
 
 
+
+
+
         ctx = document.getElementById('lineChartExampleWithNumbersAndGrid').getContext("2d");
 
         gradientStroke = ctx.createLinearGradient(500, 0, 100, 0);
@@ -364,41 +377,79 @@ demo = {
         gradientFill.addColorStop(0, "rgba(128, 182, 244, 0)");
         gradientFill.addColorStop(1, hexToRGB('#18ce0f', 0.4));
 
-        myChart = new Chart(ctx, {
-            type: 'line',
-            responsive: true,
-            data: {
-                labels: ["12pm,", "3pm", "6pm", "9pm", "12am", "3am", "6am", "9am"],
-                datasets: [{
-                    label: "Email Stats",
-                    borderColor: "#18ce0f",
-                    pointBorderColor: "#FFF",
-                    pointBackgroundColor: "#18ce0f",
-                    pointBorderWidth: 2,
-                    pointHoverRadius: 4,
-                    pointHoverBorderWidth: 1,
-                    pointRadius: 4,
-                    fill: true,
-                    backgroundColor: gradientFill,
-                    borderWidth: 2,
-                    data: [40, 500, 650, 700, 1200, 1250, 1300, 1900]
-                }]
-            },
-            options: gradientChartOptionsConfigurationWithNumbersAndGrid
+        this.myChartData = {
+            labels: ["12pm,", "3pm", "6pm", "9pm", "12am", "3am", "6am", "9am"],
+            datasets: [{
+                label: "Price",
+                borderColor: "#18ce0f",
+                pointBorderColor: "#FFF",
+                pointBackgroundColor: "#18ce0f",
+                pointBorderWidth: 2,
+                pointHoverRadius: 4,
+                pointHoverBorderWidth: 1,
+                pointRadius: 4,
+                fill: true,
+                backgroundColor: gradientFill,
+                borderWidth: 2,
+                data: [40, 500, 650, 700, 1200, 1250, 1300, 1900]
+            }]
+        };
+
+
+
+
+
+        var aa;
+        self = this;
+        $.ajax({
+            url: "/api/getBestPriceLast7",
+            context: document.body
+        }).done(function(e) {
+            self2 = self;
+            aa = JSON.parse(e)[0];
+            bb = JSON.parse(e)[1];
+            console.log(bb);
+
+            self2.myChartData.labels = aa
+            self2.myChartData.datasets[0].data = bb
+
+            self2.myChart = new Chart(ctx, {
+                type: 'line',
+                responsive: true,
+                data: self2.myChartData,
+                options: gradientChartOptionsConfigurationWithNumbersAndGrid
+            });
+            console.log(this.myChartData);
         });
 
-        var e = document.getElementById("barChartSimpleGradientsNumbers").getContext("2d");
+
+
+
+
+
+
+
+        this.e3 = document.getElementById("barChartSimpleGradientsNumbers2").getContext("2d");
+
+
+
+
+
+
+
 
         gradientFill = ctx.createLinearGradient(0, 170, 0, 50);
         gradientFill.addColorStop(0, "rgba(128, 182, 244, 0)");
         gradientFill.addColorStop(1, hexToRGB('#2CA8FF', 0.6));
 
-        var a = {
+
+
+        this.a3 = {
             type: "bar",
             data: {
                 labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
                 datasets: [{
-                    label: "Active Countries",
+                    label: "Quantity",
                     backgroundColor: gradientFill,
                     borderColor: "#2CA8FF",
                     pointBorderColor: "#FFF",
@@ -459,8 +510,188 @@ demo = {
                 }
             }
         };
+        // a.data.labels = ['s', 's']
+        var aa;
+        self = this;
+        $.ajax({
+            url: "/api/getLowestLast7",
+            context: document.body
+        }).done(function(e) {
+            self2 = self;
+            aa = JSON.parse(e)[0];
+            bb = JSON.parse(e)[1];
+            console.log(bb);
 
-        var viewsChart = new Chart(e, a);
+            self2.a3.data.labels = aa
+            self2.a3.data.datasets[0].data = bb
+
+            var viewsChart = new Chart(self2.e3, self2.a3);
+
+        });
+
+
+
+
+
+
+        this.e = document.getElementById("barChartSimpleGradientsNumbers").getContext("2d");
+
+
+
+
+        gradientFill = ctx.createLinearGradient(0, 170, 0, 50);
+        gradientFill.addColorStop(0, "rgba(128, 182, 244, 0)");
+        gradientFill.addColorStop(1, hexToRGB('#2CA8FF', 0.6));
+
+
+
+        this.a = {
+            type: "bar",
+            data: {
+                labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+                datasets: [{
+                    label: "Quantity",
+                    backgroundColor: gradientFill,
+                    borderColor: "#2CA8FF",
+                    pointBorderColor: "#FFF",
+                    pointBackgroundColor: "#2CA8FF",
+                    pointBorderWidth: 2,
+                    pointHoverRadius: 4,
+                    pointHoverBorderWidth: 1,
+                    pointRadius: 4,
+                    fill: true,
+                    borderWidth: 1,
+                    data: [80, 99, 86, 96, 123, 85, 100, 75, 88, 90, 123, 155]
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                legend: {
+                    display: false
+                },
+                tooltips: {
+                    bodySpacing: 4,
+                    mode: "nearest",
+                    intersect: 0,
+                    position: "nearest",
+                    xPadding: 10,
+                    yPadding: 10,
+                    caretPadding: 10
+                },
+                responsive: 1,
+                scales: {
+                    yAxes: [{
+                        gridLines: 0,
+                        gridLines: {
+                            zeroLineColor: "transparent",
+                            drawBorder: false
+                        }
+                    }],
+                    xAxes: [{
+                        display: 0,
+                        gridLines: 0,
+                        ticks: {
+                            display: false
+                        },
+                        gridLines: {
+                            zeroLineColor: "transparent",
+                            drawTicks: false,
+                            display: false,
+                            drawBorder: false
+                        }
+                    }]
+                },
+                layout: {
+                    padding: {
+                        left: 0,
+                        right: 0,
+                        top: 15,
+                        bottom: 15
+                    }
+                }
+            }
+        };
+        // a.data.labels = ['s', 's']
+        var aa;
+        self = this;
+        $.ajax({
+            url: "/api/getBestLast7",
+            context: document.body
+        }).done(function(e) {
+            self2 = self;
+            aa = JSON.parse(e)[0];
+            bb = JSON.parse(e)[1];
+            console.log(bb);
+
+            self2.a.data.labels = aa
+            self2.a.data.datasets[0].data = bb
+
+            var viewsChart = new Chart(self2.e, self2.a);
+
+        });
+
+
+
+
+
+
+
+
+        ctx2 = document.getElementById('lineChartExampleWithNumbersAndGrid2').getContext("2d");
+
+        gradientStroke = ctx2.createLinearGradient(500, 0, 100, 0);
+        gradientStroke.addColorStop(0, '#80b6f4');
+        gradientStroke.addColorStop(1, chartColor);
+
+        gradientFill = ctx2.createLinearGradient(0, 170, 0, 50);
+        gradientFill.addColorStop(0, "rgba(128, 182, 244, 0)");
+        gradientFill.addColorStop(1, "rgba(249, 99, 59, 0.40)");
+
+
+        this.myChartData2 = {
+            labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+            datasets: [{
+                label: "Quantity",
+                borderColor: "#f96332",
+                pointBorderColor: "#FFF",
+                pointBackgroundColor: "#f96332",
+                pointBorderWidth: 2,
+                pointHoverRadius: 4,
+                pointHoverBorderWidth: 1,
+                pointRadius: 4,
+                fill: true,
+                backgroundColor: gradientFill,
+                borderWidth: 2,
+                data: [40, 500, 650, 700, 1200, 1250, 1300, 1900]
+            }]
+        };
+
+
+
+
+
+        self = this;
+        $.ajax({
+            url: "/api/getAll",
+            context: document.body
+        }).done(function(e) {
+            self2 = self;
+            aa = JSON.parse(e)[0];
+            bb = JSON.parse(e)[1];
+            console.log(bb);
+
+            // self2.myChartData2.labels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+            self2.myChartData2.datasets[0].data = bb
+
+            self2.myChart2 = new Chart(ctx2, {
+                type: 'line',
+                responsive: true,
+                data: self2.myChartData2,
+                options: gradientChartOptionsConfigurationWithNumbersAndGrid
+            });
+            console.log(this.myChartData2);
+        });
+
     },
 
     initGoogleMaps: function() {

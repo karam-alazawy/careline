@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Transaction;
+use App\ItemData;
 class HomeController extends Controller
 {
     /**
@@ -23,6 +25,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $items = ItemData::selectRaw('SUM(price) as totalPrice,SUM(amount) as totalAmount,SUM(quantity) as totalQuantity,item_id')->groupBy('item_id')->orderBy('totalQuantity','desc')->where('created_at','>','2021-06-15 00:39:56')->with(['transaction' => function ($q) {
+           
+        }])->limit(15)->get();
+        //  return $itemData;
+   
+
+          return view('home', compact('items'));
     }
 }

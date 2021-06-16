@@ -2,10 +2,10 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Models\Province;
-use App\Models\Room;
-use App\Models\Table;
-use App\Models\Reservation;
+use Illuminate\Support\Facades\DB;
+
+use App\Transaction;
+use App\ItemData;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -20,37 +20,98 @@ use App\Models\Reservation;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::get('/getProvince', function (Request $request) {
-    $lang=1;
-    $province = Province::with(['provinceLang' => function ($q) use ($lang) {
-        $q->where('id_lang',$lang);
-        // $q->addSelect('?')
-    }])->where('id_country',$request['id'])->where('active',1)->get();
-    return $province;
+
+Route::get('/getBestLast7', function (Request $request) {
+
+    $itemData = ItemData::selectRaw('SUM(price) as totalPrice,SUM(amount) as totalAmount,SUM(quantity) as totalQuantity,item_id')->groupBy('item_id')->orderBy('totalQuantity','desc')->where('created_at','>','2021-06-15 00:39:56')->limit(15)->get();
+    //  return $itemData;
+    $a=array();
+    $b=array();
+        
+foreach ($itemData as $key => $value) {
+    array_push($b,$value->totalQuantity);
+    $transaction = Transaction::where('id', $value->item_id)->first();
+    array_push($a,$transaction->name);
+}
+
+
+$c=array($a,$b);
+
+    return json_encode($c, JSON_PRETTY_PRINT);
+    
+
 });
 
-Route::get('/getRooms', function (Request $request) {
-    $lang=1;
-    $rooms = Room::with(['roomLang' => function ($q) use ($lang) {
-        $q->where('lang_id',$lang);
-        // $q->addSelect('?')
-    }])->where('office_id',$request['id'])->where('active',1)->get();
-    return $rooms;
+
+
+Route::get('/getLowestLast7', function (Request $request) {
+
+    $itemData = ItemData::selectRaw('SUM(price) as totalPrice,SUM(amount) as totalAmount,SUM(quantity) as totalQuantity,item_id')->groupBy('item_id')->orderBy('totalQuantity','asc')->where('created_at','>','2021-06-15 00:39:56')->limit(15)->get();
+    //  return $itemData;
+    $a=array();
+    $b=array();
+        
+foreach ($itemData as $key => $value) {
+    array_push($b,$value->totalQuantity);
+    $transaction = Transaction::where('id', $value->item_id)->first();
+    array_push($a,$transaction->name);
+}
+
+
+$c=array($a,$b);
+
+    return json_encode($c, JSON_PRETTY_PRINT);
+    
+
 });
 
-Route::get('/getTables', function (Request $request) {
-    $lang=1;
-    $tables = Table::with(['tableLang' => function ($q) use ($lang) {
-        $q->where('lang_id',$lang);
-        // $q->addSelect('?')
-    }])->where('room_id',$request['id'])->where('active',1)->get();
-    return $tables;
+
+
+Route::get('/getBestPriceLast7', function (Request $request) {
+
+    $itemData = ItemData::selectRaw('SUM(price) as totalPrice,SUM(amount) as totalAmount,SUM(quantity) as totalQuantity,item_id')->groupBy('item_id')->orderBy('totalPrice','desc')->where('created_at','>','2021-06-15 00:39:56')->limit(15)->get();
+    //  return $itemData;
+    $a=array();
+    $b=array();
+        
+foreach ($itemData as $key => $value) {
+    array_push($b,$value->totalPrice);
+    $transaction = Transaction::where('id', $value->item_id)->first();
+    array_push($a,$transaction->name);
+}
+
+
+$c=array($a,$b);
+
+    return json_encode($c, JSON_PRETTY_PRINT);
+    
+
 });
 
-Route::get('/getReservations', function (Request $request) {
+
+
+
+
+Route::get('/getAll', function (Request $request) {
+    $itemData = ItemData::selectRaw("SUM(price) as totalPrice,SUM(amount) as totalAmount,SUM(quantity) as totalQuantity,YEAR(created_at) year, MONTH(created_at) month")->groupby('year','month')->orderby('month')->get();
+
    
-$reservations = Reservation::where("table_id",$request['id'])
- ->where('status','approve')
-->get();
-    return $reservations;
+    //  return $itemData;
+    $a=array();
+    $b=array();
+        
+    
+foreach ($itemData as $key => $value) {
+    array_push($b,$value->totalQuantity);
+    array_push($a,$value->month);
+}
+
+
+$c=array($a,$b);
+
+    return json_encode($c, JSON_PRETTY_PRINT);
+    
 });
+
+
+
