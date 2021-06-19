@@ -1,5 +1,9 @@
 var a;
 var e;
+var a33;
+var e33;
+var a44;
+var e44;
 var myChart;
 var myChart2;
 var myChartData;
@@ -627,6 +631,222 @@ demo = {
             self2.a.data.datasets[0].data = bb
 
             var viewsChart = new Chart(self2.e, self2.a);
+
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        this.e44 = document.getElementById("barChartSimpleGradientsNumbers4").getContext("2d");
+
+
+
+
+
+
+
+
+        gradientFill = ctx.createLinearGradient(0, 170, 0, 50);
+        gradientFill.addColorStop(0, "rgba(128, 182, 244, 0)");
+        gradientFill.addColorStop(1, hexToRGB('#2CA8FF', 0.6));
+
+
+
+        this.a44 = {
+            type: "bar",
+            data: {
+                labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+                datasets: [{
+                    label: "Quantity",
+                    backgroundColor: gradientFill,
+                    borderColor: "#2CA8FF",
+                    pointBorderColor: "#FFF",
+                    pointBackgroundColor: "#2CA8FF",
+                    pointBorderWidth: 2,
+                    pointHoverRadius: 4,
+                    pointHoverBorderWidth: 1,
+                    pointRadius: 4,
+                    fill: true,
+                    borderWidth: 1,
+                    data: [80, 99, 86, 96, 123, 85, 100, 75, 88, 90, 123, 155]
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                legend: {
+                    display: false
+                },
+                tooltips: {
+                    bodySpacing: 4,
+                    mode: "nearest",
+                    intersect: 0,
+                    position: "nearest",
+                    xPadding: 10,
+                    yPadding: 10,
+                    caretPadding: 10
+                },
+                responsive: 1,
+                scales: {
+                    yAxes: [{
+                        gridLines: 0,
+                        gridLines: {
+                            zeroLineColor: "transparent",
+                            drawBorder: false
+                        }
+                    }],
+                    xAxes: [{
+                        display: 0,
+                        gridLines: 0,
+                        ticks: {
+                            display: false
+                        },
+                        gridLines: {
+                            zeroLineColor: "transparent",
+                            drawTicks: false,
+                            display: false,
+                            drawBorder: false
+                        }
+                    }]
+                },
+                layout: {
+                    padding: {
+                        left: 0,
+                        right: 0,
+                        top: 15,
+                        bottom: 15
+                    }
+                }
+            }
+        };
+        // a.data.labels = ['s', 's']
+        var aa;
+        self = this;
+        $.ajax({
+            url: "/api/getLowestLast7Yesterday",
+            context: document.body
+        }).done(function(e) {
+            self2 = self;
+            aa = JSON.parse(e)[0];
+            bb = JSON.parse(e)[1];
+            console.log(bb);
+
+            self2.a44.data.labels = aa
+            self2.a44.data.datasets[0].data = bb
+
+            var viewsChart = new Chart(self2.e44, self2.a44);
+
+        });
+
+
+
+
+
+
+        this.e33 = document.getElementById("barChartSimpleGradientsNumbers3").getContext("2d");
+
+
+
+
+        gradientFill = ctx.createLinearGradient(0, 170, 0, 50);
+        gradientFill.addColorStop(0, "rgba(128, 182, 244, 0)");
+        gradientFill.addColorStop(1, hexToRGB('#2CA8FF', 0.6));
+
+
+
+        this.a33 = {
+            type: "bar",
+            data: {
+                labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+                datasets: [{
+                    label: "Quantity",
+                    backgroundColor: gradientFill,
+                    borderColor: "#2CA8FF",
+                    pointBorderColor: "#FFF",
+                    pointBackgroundColor: "#2CA8FF",
+                    pointBorderWidth: 2,
+                    pointHoverRadius: 4,
+                    pointHoverBorderWidth: 1,
+                    pointRadius: 4,
+                    fill: true,
+                    borderWidth: 1,
+                    data: [80, 99, 86, 96, 123, 85, 100, 75, 88, 90, 123, 155]
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                legend: {
+                    display: false
+                },
+                tooltips: {
+                    bodySpacing: 4,
+                    mode: "nearest",
+                    intersect: 0,
+                    position: "nearest",
+                    xPadding: 10,
+                    yPadding: 10,
+                    caretPadding: 10
+                },
+                responsive: 1,
+                scales: {
+                    yAxes: [{
+                        gridLines: 0,
+                        gridLines: {
+                            zeroLineColor: "transparent",
+                            drawBorder: false
+                        }
+                    }],
+                    xAxes: [{
+                        display: 0,
+                        gridLines: 0,
+                        ticks: {
+                            display: false
+                        },
+                        gridLines: {
+                            zeroLineColor: "transparent",
+                            drawTicks: false,
+                            display: false,
+                            drawBorder: false
+                        }
+                    }]
+                },
+                layout: {
+                    padding: {
+                        left: 0,
+                        right: 0,
+                        top: 15,
+                        bottom: 15
+                    }
+                }
+            }
+        };
+        // a.data.labels = ['s', 's']
+        var aa;
+        self = this;
+        $.ajax({
+            url: "/api/getBestLast7Yesterday",
+            context: document.body
+        }).done(function(e) {
+            self2 = self;
+            aa = JSON.parse(e)[0];
+            bb = JSON.parse(e)[1];
+            console.log(bb);
+
+            self2.a33.data.labels = aa
+            self2.a33.data.datasets[0].data = bb
+
+            var viewsChart = new Chart(self2.e33, self2.a33);
 
         });
 

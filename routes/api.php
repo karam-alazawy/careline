@@ -21,9 +21,57 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('/getBestLast7Yesterday', function (Request $request) {
+
+    $itemData = ItemData::selectRaw('SUM(price) as totalPrice,SUM(amount) as totalAmount,SUM(quantity) as totalQuantity,item_id')->groupBy('item_id')->orderBy('totalQuantity','desc')->where('created_at','<','2021-06-18 00:39:56')->limit(15)->get();
+    //  return $itemData;
+    $a=array();
+    $b=array();
+        
+foreach ($itemData as $key => $value) {
+    array_push($b,$value->totalQuantity);
+    $transaction = Transaction::where('id', $value->item_id)->first();
+    array_push($a,$transaction->name);
+}
+
+
+$c=array($a,$b);
+
+    return json_encode($c, JSON_PRETTY_PRINT);
+    
+
+});
+
+
+
+Route::get('/getLowestLast7Yesterday', function (Request $request) {
+
+    $itemData = ItemData::selectRaw('SUM(price) as totalPrice,SUM(amount) as totalAmount,SUM(quantity) as totalQuantity,item_id')->groupBy('item_id')->orderBy('totalQuantity','asc')->where('created_at','<','2021-06-18 00:39:56')->limit(15)->get();
+    //  return $itemData;
+    $a=array();
+    $b=array();
+        
+foreach ($itemData as $key => $value) {
+    array_push($b,$value->totalQuantity);
+    $transaction = Transaction::where('id', $value->item_id)->first();
+    array_push($a,$transaction->name);
+}
+
+
+$c=array($a,$b);
+
+    return json_encode($c, JSON_PRETTY_PRINT);
+    
+
+});
+
+
+
+
+
 Route::get('/getBestLast7', function (Request $request) {
 
-    $itemData = ItemData::selectRaw('SUM(price) as totalPrice,SUM(amount) as totalAmount,SUM(quantity) as totalQuantity,item_id')->groupBy('item_id')->orderBy('totalQuantity','desc')->where('created_at','>','2021-06-15 00:39:56')->limit(15)->get();
+    $itemData = ItemData::selectRaw('SUM(price) as totalPrice,SUM(amount) as totalAmount,SUM(quantity) as totalQuantity,item_id')->groupBy('item_id')->orderBy('totalQuantity','desc')->where('created_at','>','2021-06-18 00:39:56')->limit(15)->get();
     //  return $itemData;
     $a=array();
     $b=array();
@@ -46,7 +94,7 @@ $c=array($a,$b);
 
 Route::get('/getLowestLast7', function (Request $request) {
 
-    $itemData = ItemData::selectRaw('SUM(price) as totalPrice,SUM(amount) as totalAmount,SUM(quantity) as totalQuantity,item_id')->groupBy('item_id')->orderBy('totalQuantity','asc')->where('created_at','>','2021-06-15 00:39:56')->limit(15)->get();
+    $itemData = ItemData::selectRaw('SUM(price) as totalPrice,SUM(amount) as totalAmount,SUM(quantity) as totalQuantity,item_id')->groupBy('item_id')->orderBy('totalQuantity','asc')->where('created_at','>','2021-06-18 00:39:56')->limit(15)->get();
     //  return $itemData;
     $a=array();
     $b=array();

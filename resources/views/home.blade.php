@@ -92,7 +92,7 @@
           </div>
           <div class="card-footer">
             <div class="stats">
-              <i class="now-ui-icons ui-2_time-alarm"></i> Last 7 days
+              <i class="now-ui-icons ui-2_time-alarm"></i> Last 24 hours
             </div>
           </div>
         </div>
@@ -114,7 +114,7 @@
           </div>
           <div class="card-footer">
             <div class="stats">
-              <i class="now-ui-icons ui-2_time-alarm"></i> Last 7 days
+              <i class="now-ui-icons ui-2_time-alarm"></i> Last 24 hours
             </div>
           </div>
         </div>
@@ -122,6 +122,56 @@
     </div>
 
 
+
+
+
+    <div class="row">
+      
+      
+    <div class="col-lg-6 col-md-8">
+        <div class="card card-chart">
+        <div class="card-header">
+            <h5 class="card-category">Sales Statistics</h5>
+            <h4 class="card-title">Bestseller</h4>
+          </div>
+          <div class="card-body">
+            <div class="chart-area">
+              <canvas id="barChartSimpleGradientsNumbers3"></canvas>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class="stats">
+              <i class="now-ui-icons ui-2_time-alarm"></i> Yesterday
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+      <div class="col-lg-6 col-md-8">
+        <div class="card card-chart">
+          <div class="card-header">
+            <h5 class="card-category">Sales Statistics</h5>
+            <h4 class="card-title">lowest selling</h4>
+          </div>
+          <div class="card-body">
+            <div class="chart-area">
+              <canvas id="barChartSimpleGradientsNumbers4"></canvas>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class="stats">
+              <i class="now-ui-icons ui-2_time-alarm"></i> Yesterday
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    </div>
 
 
 
@@ -162,9 +212,8 @@
 
 
     
-    <div class="row">
  
-      <div class="col-lg-12">
+    <div class="col-lg-12 col-md-10">
         <div class="card">
           <div class="card-header">
             <h5 class="card-category">Best selling products</h5>
@@ -212,7 +261,6 @@
             </div>
           </div>
         </div>
-      </div>
     </div>
   </div>
 @endsection
