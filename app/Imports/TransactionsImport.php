@@ -15,6 +15,7 @@ class TransactionsImport implements ToModel
     */
     public function model(array $row)
     {
+        // return $row[1];
         if ( $row[1]=='المادة') 
         {}
         else

@@ -18,6 +18,9 @@ CREATE TABLE `users` (
 
 
 
+
+
+
 CREATE TABLE `items` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(250) NOT NULL,
@@ -39,6 +42,68 @@ CREATE TABLE `item_data` (
   `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `active` tinyint(1) NOT NULL DEFAULT '1',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `sales` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `account` VARCHAR(250) NOT NULL,
+  `delegate` VARCHAR(250) NOT NULL,
+  `subject` VARCHAR(250) NOT NULL,
+    `quantity` int(11) NOT NULL ,
+  `price` decimal(10,2) NOT NULL,
+  `amount` FLOAT NOT NULL,
+  `date` VARCHAR(250) NOT NULL,
+  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `active` tinyint(1) NOT NULL DEFAULT '1',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `salesP` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `account` VARCHAR(250) NOT NULL,
+  `delegate` VARCHAR(250) NOT NULL,
+  `subject` VARCHAR(250) NOT NULL,
+    `quantity` int(11) NOT NULL ,
+  `price` decimal(10,2) NOT NULL,
+  `amount` FLOAT NOT NULL,
+  `date` VARCHAR(250) NOT NULL,
+    `oldId` int(11) NOT NULL ,
+
+  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `active` tinyint(1) NOT NULL DEFAULT '1',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `store` (
+  
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+    `subject` VARCHAR(250) NOT NULL,
+  `quantity` int(11) NOT NULL ,
+  `amount` VARCHAR(250) NOT NULL,
+  `date` VARCHAR(250) NOT NULL,
+  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `active` tinyint(1) NOT NULL DEFAULT '1',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `storeP` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+    `subject` VARCHAR(250) NOT NULL,
+  `quantity` int(11) NOT NULL ,
+  `amount` VARCHAR(250) NOT NULL,
+  `date` VARCHAR(250) NOT NULL,
+  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `active` tinyint(1) NOT NULL DEFAULT '1',
+    `oldId` int(11) NOT NULL ,
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 
